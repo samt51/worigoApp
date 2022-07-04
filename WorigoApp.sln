@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.Entity", "Worigo.Entity\Worigo.Entity.csproj", "{00E9CEC9-B9F9-496E-AA1A-F92BD0D24D75}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.DataAccess", "Worigo.DataAccess\Worigo.DataAccess.csproj", "{856E62F7-13B4-427B-91A5-C34190CE2A39}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.Business", "Worigo.Business\Worigo.Business.csproj", "{68297B33-3DBD-43E1-A526-25A0C96207E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.API", "Worigo.API\Worigo.API.csproj", "{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.Core", "Worigo.Core\Worigo.Core.csproj", "{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worigo.Test", "Worigo.Test\Worigo.Test.csproj", "{A09CC930-7465-4DC3-94FB-2649DC62BF1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00E9CEC9-B9F9-496E-AA1A-F92BD0D24D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E9CEC9-B9F9-496E-AA1A-F92BD0D24D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E9CEC9-B9F9-496E-AA1A-F92BD0D24D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00E9CEC9-B9F9-496E-AA1A-F92BD0D24D75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{856E62F7-13B4-427B-91A5-C34190CE2A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856E62F7-13B4-427B-91A5-C34190CE2A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856E62F7-13B4-427B-91A5-C34190CE2A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{856E62F7-13B4-427B-91A5-C34190CE2A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68297B33-3DBD-43E1-A526-25A0C96207E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68297B33-3DBD-43E1-A526-25A0C96207E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68297B33-3DBD-43E1-A526-25A0C96207E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68297B33-3DBD-43E1-A526-25A0C96207E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A09CC930-7465-4DC3-94FB-2649DC62BF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A09CC930-7465-4DC3-94FB-2649DC62BF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A09CC930-7465-4DC3-94FB-2649DC62BF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A09CC930-7465-4DC3-94FB-2649DC62BF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4AC45C86-A2C5-44A7-904D-7351B499D16D}
+	EndGlobalSection
+EndGlobal
