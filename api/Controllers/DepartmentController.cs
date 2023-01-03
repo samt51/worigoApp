@@ -26,6 +26,8 @@ namespace Worigo.API.Controllers
             _departmanService = departmanService;
             
 
+
+
         }
         [HttpGet]
         public ResponseDto<List<DepartmentResponse>> GetAll([FromHeader] string Authorization)
