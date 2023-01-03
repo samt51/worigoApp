@@ -12,9 +12,9 @@ namespace Worigo.Business.Concrete
         {
             _roomTypeDal = roomTypeDal;
         }
-        public void Create(RoomType entity)
+        public RoomType Create(RoomType entity)
         {
-            _roomTypeDal.Create(entity);
+         return   _roomTypeDal.Create(entity);
         }
 
         public List<RoomType> GetAll()
@@ -27,9 +27,9 @@ namespace Worigo.Business.Concrete
             return _roomTypeDal.GetById(id);
         }
 
-        public void Update(RoomType entity)
+        public RoomType Update(RoomType entity)
         {
-            _roomTypeDal.Update(entity);
+           return _roomTypeDal.Update(entity);
         }
     }
 }

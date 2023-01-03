@@ -12,9 +12,9 @@ namespace Worigo.Business.Concrete
         {
             _AllImages = AllImages;
         }
-        public void Create(AllImages entity)
+        public AllImages Create(AllImages entity)
         {
-            _AllImages.Create(entity);
+            return _AllImages.Create(entity);
         }
 
         public List<AllImages> GetAll()
@@ -27,9 +27,9 @@ namespace Worigo.Business.Concrete
             return _AllImages.GetById(id);
         }
 
-        public void Update(AllImages entity)
+        public AllImages Update(AllImages entity)
         {
-            _AllImages.Update(entity);
+            return _AllImages.Update(entity);
         }
     }
 }

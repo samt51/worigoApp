@@ -10,5 +10,7 @@ namespace Worigo.Entity.Concrete
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public int NumberOfStar { get; set; }
+        public int Companyid { get; set; }
+        public Companies Companies { get; set; }
     }
 }

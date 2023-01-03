@@ -8,6 +8,7 @@ namespace Worigo.Entity.Concrete
         public string email { get; set; }
         public string password { get; set; }
         public int roleid { get; set; }
-        public int hotelid{ get; set; }
+        public int companyid { get; set; }
+
     }
 }

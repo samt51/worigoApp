@@ -1,72 +1,53 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Worigo.Business.Abstrack;
 using Worigo.Core.Dtos.JoinClass;
+using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
+using Worigo.Core.Dtos.JoinClass.ServiceValueJoin;
 using Worigo.Core.Dtos.ListDto;
 using Worigo.Core.Dtos.ResponseDtos;
-using Worigo.Core.Enum;
+using Worigo.Core.Dtos.Services.Request;
+using Worigo.Core.Dtos.Services.Response;
 using Worigo.Entity.Concrete;
 
 namespace Worigo.API.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
-
+    [Authorize]
     public class ServicesController : CustomBaseController
     {
         private readonly IServicesService _servicesService;
-        private IMapper _mapper;
-        public ServicesController(IServicesService servicesService, IMapper mapper)
+        public ServicesController(IServicesService servicesService)
         {
-            _servicesService = servicesService;
-            _mapper = mapper;
+            _servicesService = servicesService;  
         }
-        [HttpGet]
-        public IActionResult GetAll(int hotelid)
+        [HttpGet("{hotelid}")]
+        public ResponseDto<List<ServicesResponse>> GetServiceByHotelid([FromHeader] string Authorization, int hotelid)
         {
-            var services = _servicesService.serviceAndHotelJoins(hotelid);
-          
-            return CreateActionResult(ResponseDto<List<ServiceAndHotelJoin>>.Success(services, 200));
+            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+            return _servicesService.GetServiceByHotelid(keys, hotelid);
         }
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public ResponseDto<ServicesResponse> GetById([FromHeader] string Authorization, int id)
         {
-            var serviceSingular = _servicesService.GetById(id);
-            var serviceDto = _mapper.Map<ServicesDto>(serviceSingular);
-            return CreateActionResult(ResponseDto<ServicesDto>.Success(serviceDto, 200));
+            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+            return _servicesService.GetById(id, keys);
         }
         [HttpPost]
-        public IActionResult Add(ServicesDto entity)
+        public ResponseDto<ServicesResponse> Add([FromHeader] string Authorization, ServicesAddOrUpdateRequest request)
         {
-            var entitydto = new Services
-            {
-                isDeleted=false,
-                ModifyDate=System.DateTime.Now,
-                CreatedDate=System.DateTime.Now,
-                hotelid = entity.Hotelid,
-                Name=entity.Name,
-                isActive=true
-            };
-            _servicesService.Create(_mapper.Map<Services>(entitydto));
-            return CreateActionResult(ResponseDto<Services>.Success(200));
-        }
-        [HttpPost("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var serviceSingularData = _servicesService.GetById(id);
-            serviceSingularData.isDeleted = true;
-            _servicesService.Update(serviceSingularData);
-            return CreateActionResult(ResponseDto<Services>.Success(200));
+            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+            return _servicesService.Create(request, keys);
+
         }
         [HttpPost]
-        public IActionResult Update(ServicesDto entity)
+        public ResponseDto<ServicesResponse> Update([FromHeader] string Authorization, ServicesAddOrUpdateRequest request)
         {
-            var serviceupdate = _servicesService.GetById(entity.Id);
-            serviceupdate.ModifyDate = System.DateTime.Now;
-            serviceupdate.hotelid = entity.Hotelid;
-            serviceupdate.Name = entity.Name;
-            return CreateActionResult(ResponseDto<Services>.Success(200));
+            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+            return _servicesService.Update(request, keys);
         }
     }
 }

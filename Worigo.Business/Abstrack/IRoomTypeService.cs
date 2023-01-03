@@ -7,7 +7,7 @@ namespace Worigo.Business.Abstrack
     {
         List<RoomType> GetAll();
         RoomType GetById(int id);
-        void Create(RoomType entity);
-        void Update(RoomType entity);
+        RoomType Create(RoomType entity);
+        RoomType Update(RoomType entity);
     }
 }

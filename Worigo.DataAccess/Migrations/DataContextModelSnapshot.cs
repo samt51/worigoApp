@@ -65,6 +65,9 @@ namespace Worigo.DataAccess.Migrations
                     b.Property<int>("Point")
                         .HasColumnType("int");
 
+                    b.Property<int>("contentsPoint")
+                        .HasColumnType("int");
+
                     b.Property<int>("employeesid")
                         .HasColumnType("int");
 
@@ -77,42 +80,15 @@ namespace Worigo.DataAccess.Migrations
                     b.Property<bool>("isDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("speedPoint")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("Worigo.Entity.Concrete.Departman", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DepartmanName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Hotelid")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ModifyDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departman");
-                });
-
-            modelBuilder.Entity("Worigo.Entity.Concrete.Employees", b =>
+            modelBuilder.Entity("Worigo.Entity.Concrete.Companies", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -121,66 +97,6 @@ namespace Worigo.DataAccess.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExitEntryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FloorNo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifyDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDateOfWork")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("departmanid")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("gender")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("hotelid")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("phoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("userid")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("Worigo.Entity.Concrete.GeneralService", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
@@ -196,22 +112,295 @@ namespace Worigo.DataAccess.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("GeneralService");
+                    b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("Worigo.Entity.Concrete.GeneralServiceAndService", b =>
+            modelBuilder.Entity("Worigo.Entity.Concrete.ContentsOfFood", b =>
                 {
-                    b.Property<int>("Serviceid")
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("foodMenuDetailId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GeneralServiceid")
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("name")
                         .HasColumnType("int");
 
-                    b.HasKey("Serviceid", "GeneralServiceid");
+                    b.HasKey("id");
 
-                    b.HasIndex("GeneralServiceid");
+                    b.ToTable("ContentsOfFood");
+                });
 
-                    b.ToTable("GeneralServiceAndService");
+            modelBuilder.Entity("Worigo.Entity.Concrete.Departman", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DepartmanName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departman");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.DirectorsDepartmans", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("departmanid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("directoryid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("hotelid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("id");
+
+                    b.ToTable("DirectorsDepartmans");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.EmployeeOfOrder", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("employeeid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("isProccessingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("orderid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("EmployeeOfOrder");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.Employees", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ExitEntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("FloorNo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OnlineOrOfflineNow")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("StartDateOfWork")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("employeestypeid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("gender")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("hotelid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("onlineTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("userid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.EmployeesType", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("departmanid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("id");
+
+                    b.ToTable("employeesType");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.FoodMenu", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("categoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("hotelid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("id");
+
+                    b.ToTable("FoodMenu");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.FoodMenuDetail", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("foodMenuId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("FoodMenuDetail");
                 });
 
             modelBuilder.Entity("Worigo.Entity.Concrete.Hotel", b =>
@@ -223,6 +412,12 @@ namespace Worigo.DataAccess.Migrations
 
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Companiesid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Companyid")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -253,7 +448,138 @@ namespace Worigo.DataAccess.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("Companiesid");
+
                     b.ToTable("Hotel");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.ManagementOfHotels", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("hotelid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("managementid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ManagementOfHotels");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.Order", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("customerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("hotelid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("orderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("serviceValueId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("totalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("unitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.OrderList", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("employeeid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("isProccessingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("orderid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("OrderList");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.ResetPasswordForCode", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("code")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ResetPasswordForCodes");
                 });
 
             modelBuilder.Entity("Worigo.Entity.Concrete.Room", b =>
@@ -268,6 +594,9 @@ namespace Worigo.DataAccess.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFull")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
@@ -325,6 +654,96 @@ namespace Worigo.DataAccess.Migrations
                     b.ToTable("RoomType");
                 });
 
+            modelBuilder.Entity("Worigo.Entity.Concrete.ServiceOfHotel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("hotelid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("serviceid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ServiceOfHotel");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.ServiceValueOfEmployeeType", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("descrptions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("employeetypeid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("hotelid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("serviceid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("servicevalueid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ServiceValueOfEmployeeType");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.ServiceValueOfHotel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("hotelid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("serviceid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("valueid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ServiceValueOfHotel");
+                });
+
             modelBuilder.Entity("Worigo.Entity.Concrete.Services", b =>
                 {
                     b.Property<int>("id")
@@ -341,9 +760,6 @@ namespace Worigo.DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("hotelid")
-                        .HasColumnType("int");
-
                     b.Property<bool>("isActive")
                         .HasColumnType("bit");
 
@@ -353,6 +769,81 @@ namespace Worigo.DataAccess.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.ServicesValues", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Serviceid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ServicesValues");
+                });
+
+            modelBuilder.Entity("Worigo.Entity.Concrete.TasksOfEmployees", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("employeeid")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("finishDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("hotelid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("isCompleted")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("roomNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("serviceValue")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("starDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.ToTable("TasksOfEmployees");
                 });
 
             modelBuilder.Entity("Worigo.Entity.Concrete.User", b =>
@@ -368,11 +859,11 @@ namespace Worigo.DataAccess.Migrations
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("companyid")
+                        .HasColumnType("int");
+
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("hotelid")
-                        .HasColumnType("int");
 
                     b.Property<bool>("isActive")
                         .HasColumnType("bit");
@@ -434,8 +925,14 @@ namespace Worigo.DataAccess.Migrations
                     b.Property<DateTime>("FinishDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsFull")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -457,33 +954,48 @@ namespace Worigo.DataAccess.Migrations
                     b.ToTable("vertificationCodes");
                 });
 
-            modelBuilder.Entity("Worigo.Entity.Concrete.GeneralServiceAndService", b =>
+            modelBuilder.Entity("Worigo.Entity.Concrete.WaitingOrders", b =>
                 {
-                    b.HasOne("Worigo.Entity.Concrete.GeneralService", "GeneralService")
-                        .WithMany("GeneralServiceAndServices")
-                        .HasForeignKey("GeneralServiceid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.HasOne("Worigo.Entity.Concrete.Services", "Services")
-                        .WithMany("GeneralServiceAndServices")
-                        .HasForeignKey("Serviceid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
-                    b.Navigation("GeneralService");
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
 
-                    b.Navigation("Services");
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("isProccessingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("orderid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("WaitingOrders");
                 });
 
-            modelBuilder.Entity("Worigo.Entity.Concrete.GeneralService", b =>
+            modelBuilder.Entity("Worigo.Entity.Concrete.Hotel", b =>
                 {
-                    b.Navigation("GeneralServiceAndServices");
+                    b.HasOne("Worigo.Entity.Concrete.Companies", "Companies")
+                        .WithMany("Hotels")
+                        .HasForeignKey("Companiesid");
+
+                    b.Navigation("Companies");
                 });
 
-            modelBuilder.Entity("Worigo.Entity.Concrete.Services", b =>
+            modelBuilder.Entity("Worigo.Entity.Concrete.Companies", b =>
                 {
-                    b.Navigation("GeneralServiceAndServices");
+                    b.Navigation("Hotels");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,6 +16,7 @@ namespace Worigo.Core.FluentValidation
             RuleFor(x => x.Email).EmailAddress().WithMessage("E-posta adresinizi kontrol ediniz.");
             RuleFor(x=>x.NumberOfStar).InclusiveBetween(1, 5).WithMessage("1 ile 5 arasında bir yıldız sayısı giriniz.");
             RuleFor(x => x.NumberOfStar).NotEmpty().WithMessage(MessageEnum.ValidatorRequiredMessage);
+
         }
         public static string buyuk()
         {

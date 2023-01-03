@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
-using Worigo.Core.Dtos.ListDto;
+using Worigo.Core.Dtos.UserRole.Request;
 using Worigo.Core.Enum;
 
 namespace Worigo.Core.FluentValidation
 {
-    public class UserRoleValidator:AbstractValidator<UserRoleDto>
+    public class UserRoleValidator:AbstractValidator<UserRoleRequest>
     {
         public UserRoleValidator()
         {

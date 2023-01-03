@@ -1,34 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.API\\Worigo.API.csproj": {}
+    "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.API\\Worigo.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.API\\Worigo.API.csproj": {
+    "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.API\\Worigo.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.API\\Worigo.API.csproj",
+        "projectUniqueName": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.API\\Worigo.API.csproj",
         "projectName": "Worigo.API",
-        "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.API\\Worigo.API.csproj",
-        "packagesPath": "C:\\Users\\unilogistix\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.API\\obj\\",
+        "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.API\\Worigo.API.csproj",
+        "packagesPath": "C:\\Users\\Batu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\unilogistix\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Batu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -36,14 +28,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Business\\Worigo.Business.csproj": {
-                "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Business\\Worigo.Business.csproj"
+              "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Business\\Worigo.Business.csproj": {
+                "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Business\\Worigo.Business.csproj"
               },
-              "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\Worigo.Core.csproj": {
-                "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\Worigo.Core.csproj"
+              "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\Worigo.Core.csproj": {
+                "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\Worigo.Core.csproj"
               },
-              "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj"
+              "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj"
               }
             }
           }
@@ -58,6 +50,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "CorePush": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -97,31 +93,23 @@
         }
       }
     },
-    "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Business\\Worigo.Business.csproj": {
+    "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Business\\Worigo.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Business\\Worigo.Business.csproj",
+        "projectUniqueName": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Business\\Worigo.Business.csproj",
         "projectName": "Worigo.Business",
-        "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Business\\Worigo.Business.csproj",
-        "packagesPath": "C:\\Users\\unilogistix\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Business\\obj\\",
+        "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Business\\Worigo.Business.csproj",
+        "packagesPath": "C:\\Users\\Batu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Business\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\unilogistix\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Batu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -129,11 +117,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\Worigo.Core.csproj": {
-                "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\Worigo.Core.csproj"
+              "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\Worigo.Core.csproj": {
+                "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\Worigo.Core.csproj"
               },
-              "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj"
+              "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj"
               }
             }
           }
@@ -166,31 +154,23 @@
         }
       }
     },
-    "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\Worigo.Core.csproj": {
+    "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\Worigo.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\Worigo.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\Worigo.Core.csproj",
         "projectName": "Worigo.Core",
-        "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\Worigo.Core.csproj",
-        "packagesPath": "C:\\Users\\unilogistix\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\obj\\",
+        "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\Worigo.Core.csproj",
+        "packagesPath": "C:\\Users\\Batu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\unilogistix\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Batu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -198,8 +178,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Entity\\Worigo.Entity.csproj": {
-                "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Entity\\Worigo.Entity.csproj"
+              "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Entity\\Worigo.Entity.csproj": {
+                "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Entity\\Worigo.Entity.csproj"
               }
             }
           }
@@ -218,6 +198,10 @@
               "target": "Package",
               "version": "[11.0.0, )"
             },
+            "CorePush": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
             "FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[10.4.0, )"
@@ -225,6 +209,14 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [
@@ -246,31 +238,23 @@
         }
       }
     },
-    "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj": {
+    "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj",
         "projectName": "Worigo.DataAccess",
-        "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\unilogistix\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.DataAccess\\Worigo.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Batu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\unilogistix\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Batu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -278,11 +262,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\Worigo.Core.csproj": {
-                "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Core\\Worigo.Core.csproj"
+              "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\Worigo.Core.csproj": {
+                "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Core\\Worigo.Core.csproj"
               },
-              "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Entity\\Worigo.Entity.csproj": {
-                "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Entity\\Worigo.Entity.csproj"
+              "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Entity\\Worigo.Entity.csproj": {
+                "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Entity\\Worigo.Entity.csproj"
               }
             }
           }
@@ -341,31 +325,23 @@
         }
       }
     },
-    "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Entity\\Worigo.Entity.csproj": {
+    "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Entity\\Worigo.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Entity\\Worigo.Entity.csproj",
+        "projectUniqueName": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Entity\\Worigo.Entity.csproj",
         "projectName": "Worigo.Entity",
-        "projectPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Entity\\Worigo.Entity.csproj",
-        "packagesPath": "C:\\Users\\unilogistix\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\unilogistix\\source\\repos\\WorigoApp\\Worigo.Entity\\obj\\",
+        "projectPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Entity\\Worigo.Entity.csproj",
+        "packagesPath": "C:\\Users\\Batu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Batu\\Documents\\GitHub\\worigoApp\\Worigo.Entity\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\unilogistix\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Batu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },

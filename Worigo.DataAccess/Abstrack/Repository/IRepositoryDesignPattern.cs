@@ -8,7 +8,8 @@ namespace Worigo.DataAccess.Abstrack.Repository
     {
         T GetById(int id);
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
-        void Create(T entity);
-        void Update(T entity);
+        T Create(T entity);
+        T Update(T entity);
+        T Delete(T entity);  
     }
 }

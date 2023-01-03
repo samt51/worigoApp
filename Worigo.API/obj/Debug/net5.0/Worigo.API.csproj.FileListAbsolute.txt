@@ -80,3 +80,9 @@ C:\Users\unilogistix\source\repos\WorigoApp\Worigo.API\bin\Debug\net5.0\Microsof
 C:\Users\unilogistix\source\repos\WorigoApp\Worigo.API\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 C:\Users\unilogistix\source\repos\WorigoApp\Worigo.API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\unilogistix\source\repos\WorigoApp\Worigo.API\obj\Debug\net5.0\Worigo.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.API\obj\Debug\net5.0\Worigo.API.csproj.AssemblyReference.cache
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.API\obj\Debug\net5.0\Worigo.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.API\obj\Debug\net5.0\Worigo.API.AssemblyInfoInputs.cache
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.API\obj\Debug\net5.0\Worigo.API.AssemblyInfo.cs
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.API\obj\Debug\net5.0\Worigo.API.csproj.CoreCompileInputs.cache
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.API\obj\Debug\net5.0\Worigo.API.MvcApplicationPartsAssemblyInfo.cache

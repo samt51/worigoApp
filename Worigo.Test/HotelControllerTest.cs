@@ -26,9 +26,10 @@ namespace Worigo.Test
         {
             _mock = new Mock<IHotelService>();
             _mapper = new Mock<IMapper>();
+
             hotel = null;
             hotelDto = null;
-            _hotelController = new HotelController(_mock.Object, _mapper.Object);
+            _hotelController = new HotelController(null,null,null,_mock.Object, _mapper.Object);
             hotels = new List<Hotel> { new Hotel { HotelName = "", Adress = "", ImageUrl = "", PhoneNumber = "", id = 1, NumberOfStar = 3, Email = "adsa" }, new Hotel { HotelName = "", PhoneNumber = "", id = 2, Adress = "dsadas", ImageUrl = "1.jpg" } };
             hotelDtos = new List<HotelDto>();
             foreach (var item in hotels)
@@ -49,7 +50,7 @@ namespace Worigo.Test
         [Fact]
         public void List_ActionExcecutes_ReturnView()
         {
-            var result = _hotelController.GetAll();
+            var result = _hotelController.GetPersonByHotelAndRoleId("",1,1);
             Assert.IsType<ObjectResult>(result);
         }
         [Fact]
@@ -59,20 +60,20 @@ namespace Worigo.Test
             _mock.Setup(rep => rep.GetAll()).Returns(hotels);
             _mapper.Setup(m => m.Map<IEnumerable<HotelDto>>(It.IsAny<List<Hotel>>())).Returns(hotelDtos);
             //act
-            var result = _hotelController.GetAll();
+            var result = _hotelController.GetPersonByHotelAndRoleId("", 1, 1);
             //assert
             var objectresult = Assert.IsType<ObjectResult>(result);
             var hotellist = Assert.IsAssignableFrom<ResponseDto<List<HotelDto>>>(objectresult.Value);
-            Assert.Equal<int>(2, hotellist.Data.Count);
+            Assert.Equal<int>(2, hotellist.data.Count);
         }
         [Theory]
         [InlineData(0)]
         public void GetById_IdInValid_ReturnNotFound(int hotelid)
         {
 
-            _mock.Setup(z => z.GetById(hotelid)).Returns(hotel);
+            //_mock.Setup(z => z.GetById(hotelid)).Returns(hotel);
             _mapper.Setup(x => x.Map<HotelDto>(It.IsAny<Hotel>())).Returns(hotelDto);
-            var result = _hotelController.GetById(hotelid);
+            var result = _hotelController.GetById("",hotelid);
             Assert.IsType<ObjectResult>(result);
         }
         [Theory]
@@ -82,15 +83,15 @@ namespace Worigo.Test
         {
             var product = hotels.First(x => x.id == hotelid);
             var hoteldto = hotelDtos.First(x => x.id == hotelid);
-            _mock.Setup(x => x.GetById(hotelid)).Returns(product);
+            //_mock.Setup(x => x.GetById(hotelid)).Returns(product);
             _mapper.Setup(x => x.Map<HotelDto>(It.IsAny<Hotel>())).Returns(hoteldto);
 
 
-            var result = _hotelController.GetById(hotelid);
+            var result = _hotelController.GetById("", hotelid);
 
             var okresult = Assert.IsType<ObjectResult>(result);
             var returnresult = Assert.IsType<ResponseDto<HotelDto>>(okresult.Value);
-            Assert.Equal(hotelid, returnresult.Data.id);
+            Assert.Equal(hotelid, returnresult.data.id);
 
         }
 
@@ -102,11 +103,11 @@ namespace Worigo.Test
             var hotel = hotels.First();
             var productbyid = hotels.First(x => x.id == hotel.id);
             var hoteldtobyid = hotelDtos.First(x => x.id == hoteldto.id);
-            _mock.Setup(x => x.GetById(hotel.id)).Returns(hotel);
+            //_mock.Setup(x => x.GetById(hotel.id)).Returns(hotel);
             _mapper.Setup(x => x.Map<HotelDto>(It.IsAny<Hotel>())).Returns(hoteldto);
             _mock.Setup(x => x.Update(hotel));
             _mapper.Setup(x => x.Map<HotelDto>(It.IsAny<Hotel>()));
-            var result = _hotelController.Update(hoteldto);
+            var result = _hotelController.Update(hoteldto,"");
             _mock.Verify(x => x.Update(hotel), Times.Once);
             Assert.IsType<ObjectResult>(result);
 
@@ -116,10 +117,10 @@ namespace Worigo.Test
         {
             var hotelentity = hotels.First();
             var hoteldtoentity = hotelDtos.First();
-            _mock.Setup(x => x.Create(hotelentity));
+            //_mock.Setup(x => x.Create(hotelentity));
             _mapper.Setup(x => x.Map<HotelDto>(It.IsAny<Hotel>())).Returns(hoteldtoentity);
 
-            var result = _hotelController.Add(hoteldtoentity);
+            var result = _hotelController.Add(null,"", 2);
 
 
             var key = Assert.IsType<ObjectResult>(result);
@@ -128,7 +129,7 @@ namespace Worigo.Test
 
 
 
-            Assert.Equal(200, returnresult.StatusCode);
+            Assert.Equal(200, returnresult.statusCode);
 
 
         }

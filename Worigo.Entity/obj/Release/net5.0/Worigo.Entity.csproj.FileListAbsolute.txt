@@ -10,3 +10,15 @@ C:\Users\unilogistix\source\repos\WorigoApp\Worigo.Entity\obj\Release\net5.0\Wor
 C:\Users\unilogistix\source\repos\WorigoApp\Worigo.Entity\obj\Release\net5.0\refint\Worigo.Entity.dll
 C:\Users\unilogistix\source\repos\WorigoApp\Worigo.Entity\obj\Release\net5.0\Worigo.Entity.pdb
 C:\Users\unilogistix\source\repos\WorigoApp\Worigo.Entity\obj\Release\net5.0\ref\Worigo.Entity.dll
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\bin\Release\net5.0\Worigo.Entity.deps.json
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\bin\Release\net5.0\Worigo.Entity.dll
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\bin\Release\net5.0\Worigo.Entity.pdb
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\obj\Release\net5.0\Worigo.Entity.csproj.AssemblyReference.cache
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\obj\Release\net5.0\Worigo.Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\obj\Release\net5.0\Worigo.Entity.AssemblyInfoInputs.cache
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\obj\Release\net5.0\Worigo.Entity.AssemblyInfo.cs
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\obj\Release\net5.0\Worigo.Entity.csproj.CoreCompileInputs.cache
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\obj\Release\net5.0\Worigo.Entity.dll
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\obj\Release\net5.0\refint\Worigo.Entity.dll
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\obj\Release\net5.0\Worigo.Entity.pdb
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Entity\obj\Release\net5.0\ref\Worigo.Entity.dll

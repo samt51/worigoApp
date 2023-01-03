@@ -166,3 +166,9 @@ C:\Users\unilogistix\source\repos\WorigoApp\Worigo.Test\obj\Debug\net5.0\refint\
 C:\Users\unilogistix\source\repos\WorigoApp\Worigo.Test\obj\Debug\net5.0\Worigo.Test.pdb
 C:\Users\unilogistix\source\repos\WorigoApp\Worigo.Test\obj\Debug\net5.0\Worigo.Test.genruntimeconfig.cache
 C:\Users\unilogistix\source\repos\WorigoApp\Worigo.Test\obj\Debug\net5.0\ref\Worigo.Test.dll
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Test\bin\Debug\net5.0\CoverletSourceRootsMapping
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Test\obj\Debug\net5.0\Worigo.Test.csproj.AssemblyReference.cache
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Test\obj\Debug\net5.0\Worigo.Test.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Test\obj\Debug\net5.0\Worigo.Test.AssemblyInfoInputs.cache
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Test\obj\Debug\net5.0\Worigo.Test.AssemblyInfo.cs
+C:\Users\Batu\Documents\GitHub\worigoApp\Worigo.Test\obj\Debug\net5.0\Worigo.Test.csproj.CoreCompileInputs.cache

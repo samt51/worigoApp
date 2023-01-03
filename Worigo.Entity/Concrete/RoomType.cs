@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Worigo.Entity.Abstrack;
+﻿using Worigo.Entity.Abstrack;
 
 namespace Worigo.Entity.Concrete
 {

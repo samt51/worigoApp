@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.API", "Worigo.API\Wo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.Core", "Worigo.Core\Worigo.Core.csproj", "{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worigo.Test", "Worigo.Test\Worigo.Test.csproj", "{A09CC930-7465-4DC3-94FB-2649DC62BF1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.Test", "Worigo.Test\Worigo.Test.csproj", "{A09CC930-7465-4DC3-94FB-2649DC62BF1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "api\api.csproj", "{F1F6868C-E1DC-435A-9668-0C5B9802ADE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A09CC930-7465-4DC3-94FB-2649DC62BF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A09CC930-7465-4DC3-94FB-2649DC62BF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A09CC930-7465-4DC3-94FB-2649DC62BF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1F6868C-E1DC-435A-9668-0C5B9802ADE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1F6868C-E1DC-435A-9668-0C5B9802ADE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1F6868C-E1DC-435A-9668-0C5B9802ADE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1F6868C-E1DC-435A-9668-0C5B9802ADE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

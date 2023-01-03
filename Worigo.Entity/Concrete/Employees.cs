@@ -9,13 +9,15 @@ namespace Worigo.Entity.Concrete
         public string Name { get; set; }
         public string Surname { get; set; }
         public string ImageUrl { get; set; }
-        public int FloorNo { get; set; }
+        public int? FloorNo { get; set; }
         public string phoneNumber { get; set; }
         public bool gender { get; set; }
-        public DateTime StartDateOfWork { get; set; }
-        public DateTime ExitEntryDate { get; set; }
+        public DateTime? StartDateOfWork { get; set; }
+        public DateTime? ExitEntryDate { get; set; }
         public int userid { get; set; }
-        public int hotelid { get; set; }
-        public int departmanid { get; set; }
+        public int? hotelid { get; set; }
+        public int? employeestypeid { get; set; }
+        public DateTime? onlineTime { get; set; }
+        public bool OnlineOrOfflineNow{ get; set; }
     }
 }

@@ -9,6 +9,5 @@
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public int NumberOfStar { get; set; }
-        public bool isActive { get; set; }
     }
 }

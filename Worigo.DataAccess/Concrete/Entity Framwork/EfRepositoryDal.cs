@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,28 @@ using Worigo.DataAccess.Abstrack.Repository;
 
 namespace Worigo.DataAccess.Concrete.Entity_Framwork
 {
-    public class EfRepositoryDal<T, TEntity> :  IRepositoryDesignPattern<T> where T : class where TEntity : DbContext,new()
+    public class EfRepositoryDal<T, TEntity> : IRepositoryDesignPattern<T> where T : class where TEntity : DbContext, new()
     {
-        public void Create(T entity)
+        public T Create(T entity)
         {
             using (var db = new TEntity())
             {
-                db.Set<T>().Add(entity);
+                var data = db.Set<T>().Add(entity);
                 db.SaveChanges();
+                return data.Entity;
             }
         }
+
+        public T Delete(T entity)
+        {
+            using (var db = new TEntity())
+            {
+                var data = db.Set<T>().Remove(entity);
+                db.SaveChanges();
+                return data.Entity;
+            }
+        }
+
         public List<T> GetAll(Expression<Func<T, bool>> filter = null)
         {
             using (var db = new TEntity())
@@ -39,12 +52,14 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
                 return find;
             }
         }
-        public void Update(T entity)
+        public T Update(T entity)
         {
             using (var db = new TEntity())
             {
-                db.Entry(entity).State = EntityState.Modified;
+                var data = db.Set<T>().Update(entity);
                 db.SaveChanges();
+                return data.Entity;
+
             }
         }
     }

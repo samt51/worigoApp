@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Worigo.Core.Dtos.JoinClass;
+using Worigo.Core.Dtos.Reports.HotelGeneralPuan;
+using Worigo.Core.Exceptions;
 using Worigo.DataAccess.Abstrack;
 using Worigo.DataAccess.CodeFirst;
 using Worigo.Entity.Concrete;
@@ -9,22 +12,83 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
 {
     public class EfCommentDal : EfRepositoryDal<Comment, DataContext>, ICommentDal
     {
-        public List<CommentListJoin> commentListJoins(int hotelid)
+        public CommentListJoin GetByIdJoin(int id)
         {
-            using (var db=new DataContext())
+            using (var db = new DataContext())
             {
-                var joinlist = from d1 in db.Comment.Where(x => x.hotelid == hotelid && x.isDeleted == false)
+                var joinsorgu = from d1 in db.Comment.Where(x => x.Id == id)
+                                join d2 in db.Employees on d1.employeesid equals d2.id
+                                join d3 in db.employeesType on d2.employeestypeid equals d3.id
+                                join d4 in db.Hotel on d2.hotelid equals d4.id
+                                select new CommentListJoin
+                                {
+                                    Id = d1.Id,
+                                    EmployeeNameAndSurname = d2.Name + " " + d2.Surname,
+                                    Commentary = d1.Commentary,
+                                    EmployeePoint = d1.Point,
+                                    EmployeesType = d3.TypeName,
+                                    Hotel = d4.HotelName
+                                };
+                return joinsorgu.First();
+            }
+        }
+        public List<CommentListJoin> GetCommentByHotelid(int hotelid)
+        {
+            using (var db = new DataContext())
+            {
+                var joinList = from d1 in db.Comment.Where(x => x.hotelid == hotelid && x.isDeleted == false)
                                join d2 in db.Hotel on d1.hotelid equals d2.id
                                join d3 in db.Employees on d1.employeesid equals d3.id
+                               join d4 in db.employeesType on d3.employeestypeid equals d4.id
                                select new CommentListJoin
                                {
-                                   Commentary=d1.Commentary,
-                                   employees=d3.Name+" " +d3.Surname,
-                                   hotel=d2.HotelName,
-                                   Id=d1.Id
+                                   Id = d1.Id,
+                                   Commentary = d1.Commentary,
+                                   EmployeeNameAndSurname = d3.Name + " " + d3.Surname,
+                                   Hotel = d2.HotelName,
+                                   EmployeesType = d4.TypeName,
+                                   EmployeePoint = d1.Point,
+                                   ContentsPoint = d1.contentsPoint,
+                                   SpeedPoint = d1.speedPoint,
+                                   CreateDate = d1.CreatedDate,
+                                   GeneralPoint = (d1.Point + d1.contentsPoint + d1.speedPoint) / 3
                                };
-                return joinlist.ToList();
-            };
+                return joinList.OrderByDescending(x => x.CreateDate).ToList();
+            }
+        }
+        public List<CommentListJoin> GetEmployeesOfCommentByHotelidAndEmployeesid(int hotelid, int employeeid)
+        {
+            throw new System.NotImplementedException();
+        }
+        public HotelGeneralPointResponse HotelGeneralPointByHotelId(int hotelid)
+        {
+            using (var db = new DataContext())
+            {
+                var GeneralHotelPointList = db.Comment.Where(x => x.hotelid == hotelid && x.isDeleted == false).ToList();
+                var HotelName = db.Hotel.Where(x => x.id == hotelid && x.isDeleted == false).FirstOrDefault();
+                if (HotelName == null)
+                    throw new ClientSideException("Hotel Not Found");
+                var EmployeePoint = 0;
+                var SpeedPoint = 0;
+                var ServicePoint = 0;
+                EmployeePoint = GeneralHotelPointList.Sum(x => x.Point);
+                SpeedPoint = GeneralHotelPointList.Sum(x => x.speedPoint);
+                ServicePoint = GeneralHotelPointList.Sum(x => x.contentsPoint);
+                var employe = Convert.ToDecimal(Convert.ToDecimal(EmployeePoint / Convert.ToDecimal((GeneralHotelPointList.Count() * 3))).ToString("0.#"));
+                var speed = Convert.ToDecimal(Convert.ToDecimal(Convert.ToDecimal(SpeedPoint) / GeneralHotelPointList.Select(x => x.speedPoint).Count()).ToString("0.#"));
+                var service = Convert.ToDecimal((Convert.ToDecimal(ServicePoint) / GeneralHotelPointList.Count()).ToString("0.#"));
+                var GeneralSum = Convert.ToDecimal((employe + speed + service) / GeneralHotelPointList.Count);
+                var entity = new HotelGeneralPointResponse
+                {
+                    HotelName = HotelName.HotelName,
+                    EmployeePoint = employe,
+                    SpeedPoint = speed,
+                    ServicePoint = service,
+                    HotelAveragePoint = GeneralSum,
+                    CommentCount = GeneralHotelPointList.Count
+                };
+                return entity;
+            }
         }
     }
 }

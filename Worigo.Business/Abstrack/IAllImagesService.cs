@@ -7,7 +7,7 @@ namespace Worigo.Business.Abstrack
     {
         List<AllImages> GetAll();
         AllImages GetById(int id);
-        void Create(AllImages entity);
-        void Update(AllImages entity);
+        AllImages Create(AllImages entity);
+        AllImages Update(AllImages entity);
     }
 }

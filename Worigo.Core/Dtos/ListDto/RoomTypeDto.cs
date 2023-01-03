@@ -7,6 +7,5 @@ namespace Worigo.Core.Dtos.ListDto
     {
         public int id { get; set; }
         public string typeName { get; set; }
-        public bool isActive { get; set; }
     }
 }

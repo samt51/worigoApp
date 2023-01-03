@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "Worigo.API/1.0.0": {
         "dependencies": {
+          "CorePush": "3.1.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.0",
           "Microsoft.Graph": "4.22.0",
           "Newtonsoft.Json": "13.0.1",
@@ -372,6 +373,21 @@
         },
         "compile": {
           "lib/net5.0/Azure.Core.dll": {}
+        }
+      },
+      "CorePush/3.1.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1",
+          "Portable.BouncyCastle": "1.9.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/CorePush.dll": {
+            "assemblyVersion": "3.1.1.0",
+            "fileVersion": "3.1.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/CorePush.dll": {}
         }
       },
       "FluentValidation/10.4.0": {
@@ -809,6 +825,17 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "Portable.BouncyCastle/1.9.0": {
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.9.0.0",
+            "fileVersion": "1.9.0.1"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "Swashbuckle.AspNetCore/6.3.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "3.0.0",
@@ -1114,8 +1141,11 @@
       "Worigo.Core/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "CorePush": "3.1.1",
           "FluentValidation.AspNetCore": "10.4.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.0",
+          "Microsoft.EntityFrameworkCore": "5.0.0",
+          "Newtonsoft.Json": "13.0.1",
           "Worigo.Entity": "1.0.0"
         },
         "runtime": {
@@ -2839,6 +2869,13 @@
       "path": "azure.core/1.22.0",
       "hashPath": "azure.core.1.22.0.nupkg.sha512"
     },
+    "CorePush/3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hJcLlEIJ7DqyuRHIxBEBiBxTuMQM4ZOir7Pq2qckNvaFb5wRmShF3/a6Q6uoPIudylqMzRkxX8Ryl6kHmeSa1Q==",
+      "path": "corepush/3.1.1",
+      "hashPath": "corepush.3.1.1.nupkg.sha512"
+    },
     "FluentValidation/10.4.0": {
       "type": "package",
       "serviceable": true,
@@ -3097,6 +3134,13 @@
       "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "Portable.BouncyCastle/1.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "path": "portable.bouncycastle/1.9.0",
+      "hashPath": "portable.bouncycastle.1.9.0.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.3.0": {
       "type": "package",

@@ -8,7 +8,7 @@ namespace Worigo.Core.FluentValidation
     {
         public RoomValidator()
         {
-            RuleFor(x => x.RoomType).NotEmpty().WithMessage(MessageEnum.ValidatorRequiredMessage);
+            RuleFor(x => x.RoomTypeid).NotEmpty().WithMessage(MessageEnum.ValidatorRequiredMessage);
             RuleFor(x => x.NumberOfBeds).NotEmpty().WithMessage(MessageEnum.ValidatorRequiredMessage);
             RuleFor(x => x.NumberOfBeds).GreaterThan(0).WithMessage(priceValidator());
             RuleFor(x => x.RoomNo).NotEmpty().WithMessage(MessageEnum.ValidatorRequiredMessage);

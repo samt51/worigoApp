@@ -5,13 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Dtos\ContentsOfMenuDetail\Request\" />
+    <Folder Include="Dtos\DirectorsDepartmans\Response\" />
+    <Folder Include="Dtos\Order\Response\" />
     <Folder Include="RepositoryDesign\Concrete\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="CorePush" Version="3.1.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
