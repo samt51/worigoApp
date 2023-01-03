@@ -24,6 +24,7 @@ namespace Worigo.API.Controllers
         public DepartmentController(IDepartmanService departmanService)
         {
             _departmanService = departmanService;
+            
 
         }
         [HttpGet]
