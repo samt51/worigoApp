@@ -32,7 +32,7 @@ namespace Worigo.API.Middlewares
                     context.Response.StatusCode = statuscode;
                     var errorlist = new List<string>();
                     errorlist.Add(exceptionfeatur.Error.Message);
-                    var response = ResponseDto<NoContentResult>.Fail(statuscode, errorlist); //ErrorDto.Fail(exceptionfeatur.Error.Message,400,MessageEnum.IsFailed);
+                    var response = new  ResponseDto<NoContentResult>().Fail(statuscode, errorlist); //ErrorDto.Fail(exceptionfeatur.Error.Message,400,MessageEnum.IsFailed);
                     await context.Response.WriteAsync(JsonSerializer.Serialize(response));
                 });
             });

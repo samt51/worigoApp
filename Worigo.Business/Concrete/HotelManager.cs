@@ -18,20 +18,22 @@ namespace Worigo.Business.Concrete
     {
         private readonly IHotelDal _hotelsDal;
         private readonly IManagementOfHotelService _managementOfHotelsDal;
-        private readonly ICompaniesService _companiesDal;
+        private readonly ICommentService _companiesDal;
         private readonly IMapper _mapper;
-        public HotelManager(ICompaniesService companiesDal, IMapper mapper, IManagementOfHotelService managementOfHotelsDal, IHotelDal hotelsDal)
+        private readonly ICompaniesService _companiesService;
+        public HotelManager(ICompaniesService companiesService, IMapper mapper, IManagementOfHotelService managementOfHotelsDal, IHotelDal hotelsDal)
         {
             _hotelsDal = hotelsDal;
-            _companiesDal = companiesDal;
+            _companiesService = companiesService;
             _managementOfHotelsDal = managementOfHotelsDal;
             _mapper = mapper;
         }
 
 
-        public ResponseDto<HotelResponse> Create(TokenKeys data, HotelAddOrUpdateRequest entity, int companyid)
+        public ResponseDto<HotelResponse> Create(TokenKeys data, HotelAddOrUpdateRequest entity)
         {
-            if ((data.companyid == companyid) && data.role == 2)
+            _companiesDal.GetById(entity.Companyid, data);
+            if ((data.companyid == entity.Companyid) && data.role == 2)
             {
                 if (entity.file != null)
                 {
@@ -43,7 +45,6 @@ namespace Worigo.Business.Concrete
             }
             else if (data.role == 1)
             {
-                data.companyid = companyid;
                 var map = _hotelsDal.Create(_mapper.Map<Hotel>(entity));
                 return new ResponseDto<HotelResponse>().Success(_mapper.Map<HotelResponse>(map), 200);
             }
@@ -57,7 +58,7 @@ namespace Worigo.Business.Concrete
         }
         public ResponseDto<List<HotelResponse>> GetHotelByCompanyid(int companyid, TokenKeys keys)
         {
-            _companiesDal.GetById(companyid);
+            _companiesService.GetById(companyid, keys);
             if ((keys.companyid == companyid) && keys.role == 2 || keys.role == 1)
             {
                 var listdata = _hotelsDal.GetHotelByCompanyid(companyid);
@@ -68,7 +69,7 @@ namespace Worigo.Business.Concrete
 
         public ResponseDto<HotelResponse> GetHotelByCompanyIdAndHotelId(int companyid, int hotelid, TokenKeys keys)
         {
-            _companiesDal.GetById(companyid);
+            _companiesService.GetById(companyid, keys);
             if ((keys.companyid == companyid) && keys.role == 2 || keys.role == 1)
             {
                 var listdata = _hotelsDal.GetHotelByCompanyIdAndHotelId(companyid, hotelid);
@@ -76,8 +77,6 @@ namespace Worigo.Business.Concrete
             }
             return new ResponseDto<HotelResponse>().Authorization();
         }
-
-
 
         public ResponseDto<HotelResponse> Update(HotelAddOrUpdateRequest entity, TokenKeys keys)
         {
@@ -92,10 +91,11 @@ namespace Worigo.Business.Concrete
             singularHotel.Email = entity.Email;
             singularHotel.NumberOfStar = entity.NumberOfStar;
             singularHotel.ModifyDate = System.DateTime.Now;
-            _hotelsDal.Update(singularHotel);
-            return new ResponseDto<HotelResponse>().Success(200);
+            var data = _hotelsDal.Update(singularHotel);
+
+            return new ResponseDto<HotelResponse>().Success(_mapper.Map<HotelResponse>(data), 200);
         }
- 
+
         ResponseDto<HotelResponse> IHotelService.GetById(TokenKeys token, int id)
         {
             var data = _hotelsDal.GetById(id);

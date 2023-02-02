@@ -19,6 +19,7 @@ using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
 using Worigo.Core.Dtos.ManagerDto.Request;
 using Worigo.Core.Dtos.ManagerDto.Response;
 using Worigo.Core.Dtos.ResponseDtos;
+using Worigo.Core.Dtos.User.Dto;
 using Worigo.Core.Dtos.User.Request;
 using Worigo.Core.Dtos.User.Response;
 using Worigo.Core.Exceptions;
@@ -120,31 +121,28 @@ namespace Worigo.Business.Concrete
 
         #region FOR Manager
 
-        public ResponseDto<List<AddHotelAdminModelDto>> GetHotelAdminByCompaniesid(int companiesid)
-        {
-            return new ResponseDto<List<AddHotelAdminModelDto>>().Success(_userDal.GetHotelAdminByCompaniesId(companiesid), 200);
-        }
+     
 
         public ResponseDto<List<ManagementResponse>> GetManagemetByCompaniesid(int companiesid)
         {
             return new ResponseDto<List<ManagementResponse>>().Success(_userDal.GetManagemetByCompaniesid(companiesid), 200);
         }
 
-        public ResponseDto<List<ManagementResponse>> GetManagemetByHotelid(TokenKeys token, int hotelid)
+        public ResponseDto<List<ManagementUserResponse>> GetManagemetByHotelid(TokenKeys token, int hotelid)
         {
             var hotel = _hotelDal.GetById(token, hotelid);
             if (token.role == 1)
-                return new ResponseDto<List<ManagementResponse>>().Success(_userDal.GetManagemetByHotelid(hotelid), 200);
-            else if ((hotel.Companyid == token.companyid) && token.role == 2)
+                return new ResponseDto<List<ManagementUserResponse>>().Success(_userDal.GetManagemetByHotelid(hotelid), 200);
+            else if ((hotel.data.Companyid == token.companyid) && token.role == 2)
             {
-                return new ResponseDto<List<ManagementResponse>>().Success(_userDal.GetManagemetByHotelid(hotelid), 200);
+                return new ResponseDto<List<ManagementUserResponse>>().Success(_userDal.GetManagemetByHotelid(hotelid), 200);
             }
             else if ((token.role == 3))
             {
                 _managementOfHotelsDal.GetManagementBymanagementIdByHotelid(token.userId, hotelid);
-                return new ResponseDto<List<ManagementResponse>>().Success(_userDal.GetManagemetByHotelid(hotelid), 200);
+                return new ResponseDto<List<ManagementUserResponse>>().Success(_userDal.GetManagemetByHotelid(hotelid), 200);
             }
-            return new ResponseDto<List<ManagementResponse>>().Authorization();
+            return new ResponseDto<List<ManagementUserResponse>>().Authorization();
         }
         #endregion
 
@@ -208,10 +206,6 @@ namespace Worigo.Business.Concrete
             return token;
         }
 
-
-
-
-
         #region FOR Directory
         public ResponseDto<NoContentResult> DirectoryUpdate(TokenKeys keys, UserAndDirectoryDepartmentAddOrUpdateRequest request)
         {
@@ -254,30 +248,36 @@ namespace Worigo.Business.Concrete
             return new ResponseDto<UserAndDirectoryResponse>().Authorization();
         }
 
-        public AddHotelAdminModelDto GetHotelAdminByAdminUserId(int adminUserId)
-        {
-            return _userDal.GetHotelAdminByAdminUserId(adminUserId);
-        }
+     
 
-        public ResponseDto<AddHotelAdminModelDto> GetHotelAdminByAdminUserId(int adminUserId, TokenKeys keys)
-        {
-            if (keys.role == 2 && (keys.userId == adminUserId) || keys.role == 1)
-            {
-                var data = _userDal.GetHotelAdminByAdminUserId(adminUserId);
-                return new ResponseDto<AddHotelAdminModelDto>().Success(data, 200);
-            }
-            return new ResponseDto<AddHotelAdminModelDto>().Authorization();
-        }
+        
 
         public ResponseDto<List<ManagementResponse>> GetManagemetByCompaniesid(int companiesid, TokenKeys keys)
         {
             throw new NotImplementedException();
         }
 
-        public ResponseDto<List<AddHotelAdminModelDto>> GetHotelAdminByCompaniesId(int companiesid, TokenKeys keys)
+        ResponseDto<List<ManagementUserResponse>> IUserService.GetHotelAdminByCompaniesid(int companiesid)
         {
-            throw new NotImplementedException();
+            return new ResponseDto<List<ManagementUserResponse>>().Success(_userDal.GetHotelAdminByCompaniesId(companiesid), 200);
         }
+
+        ResponseDto<ManagementUserResponse> IUserService.GetHotelAdminByAdminUserId(int userid, TokenKeys keys)
+        {
+            if (keys.role == 2 && (keys.userId == userid) || keys.role == 1)
+            {
+                var data = _userDal.GetHotelAdminByAdminUserId(userid);
+                return new ResponseDto<ManagementUserResponse>().Success(data, 200);
+            }
+            return new ResponseDto<ManagementUserResponse>().Authorization();
+        }
+
+
+
+
+
+
+
 
 
         #endregion

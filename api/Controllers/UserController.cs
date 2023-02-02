@@ -16,6 +16,7 @@ using Worigo.Core.Dtos.ListDto;
 using Worigo.Core.Dtos.ManagerDto.Request;
 using Worigo.Core.Dtos.ManagerDto.Response;
 using Worigo.Core.Dtos.ResponseDtos;
+using Worigo.Core.Dtos.User.Dto;
 using Worigo.Core.Dtos.User.Request;
 using Worigo.Core.Dtos.User.Response;
 using Worigo.Entity.Concrete;
@@ -117,117 +118,107 @@ namespace Worigo.API.Controllers
         #region FOR HotelAdmin
 
         [HttpPost("{companiesid}")]
-        public ResponseDto<NoContentResult> AddHotelAdminByCompaniesid([FromHeader] string Authorization, AddHotelAdminModelDto modelDto, int companiesid)
+        public ResponseDto<NoContentResult> AddHotelAdminByCompaniesid([FromHeader] string Authorization, ManagementUserAddOrUpdateRequest request, int companiesid)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            _companiesService.GetById(companiesid);
+            _companiesService.GetById(companiesid, keys);
             if (keys.role == 1)
             {
-                var user = new UserRequest
-                {
-                    email = modelDto.email,
-                    password = modelDto.password,
-                    roleid = 2,
-                    companyid = companiesid,
-                };
-                var userResponse = _userService.Create(user, keys);
-
-                var admin = new Employees
-                {
-                    Name = modelDto.name,
-                    Surname = modelDto.surname,
-                    ImageUrl = modelDto.imageurl,
-                    phoneNumber = modelDto.phonenumber,
-                    gender = modelDto.gender,
-                    CreatedDate = System.DateTime.Now,
-                    ModifyDate = System.DateTime.Now,
-                    StartDateOfWork = new System.DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
-                    ExitEntryDate = new System.DateTime(0001, 01, 01),
-                    isActive = true,
-                    isDeleted = false,
-                    FloorNo = 0,
-                    hotelid = null,
-                    userid = userResponse.data.id,
-                    employeestypeid = 2
-                };
-                _employeesService.Create(keys, _mapper.Map<EmployeeRequest>(admin));
+                //user ekleme
+                var userMap = _mapper.Map<UserRequest>(request);
+                userMap.roleid = 2;
+                userMap.companyid = companiesid;
+                var userResponse = _userService.Create(userMap, keys);
+                //employee kaydetme
+                var adminMap = _mapper.Map<EmployeeRequest>(request);
+                adminMap.userid = userResponse.data.id;
+                adminMap.employeestypeid = 2;
+                var ds = _employeesService.Create(keys, adminMap);
                 return new ResponseDto<NoContentResult>().Success(200);
             }
             return new ResponseDto<NoContentResult>().Authorization();
         }
         [HttpGet("{companiesid}")]
-        public ResponseDto<List<CampanyAndHotelJoinList>> GetHotelAdminByCompaniesid([FromHeader] string Authorization, int companiesid)
+        public ResponseDto<List<ManagementUserResponse>> GetHotelAdminByCompaniesid([FromHeader] string Authorization, int companiesid)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            return new ResponseDto<List<CampanyAndHotelJoinList>>().Success(_hotelService.GetHotelsByCompanyid(companiesid), 200);
+            return _userService.GetHotelAdminByCompaniesid(companiesid);
+
         }
         [HttpPost]
-        public ResponseDto<NoContentResult> UpdateHotelAdmin([FromHeader] string Authorization, AddHotelAdminModelDto request)
+        public ResponseDto<NoContentResult> UpdateHotelAdmin([FromHeader] string Authorization, ManagementUserAddOrUpdateRequest request)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            var userid = _userService.GetById(request.AdminUserId, keys);
+            var userid = _userService.GetById(request.id, keys);
             if (keys.role == 2 && (keys.companyid == userid.data.companyid) || keys.role == 1)
             {
                 userid.data.password = request.password;
                 var data = _userService.Update(_mapper.Map<UserRequest>(userid), keys);
-                var employee = _employeesService.GetEmployeeByUserId(request.AdminUserId, keys);
-                employee.data.Name = request.name;
-                employee.data.Surname = request.surname;
-                employee.data.ImageUrl = request.imageurl;
-                employee.data.phoneNumber = request.phonenumber;
+                var employee = _employeesService.GetEmployeeByUserId(request.id, keys);
+                employee.data.Name = request.Name;
+                employee.data.Surname = request.Surname;
+                employee.data.ImageUrl = request.ImageUrl;
+                employee.data.phoneNumber = request.phoneNumber;
                 _employeesService.Update(keys, _mapper.Map<EmployeeRequest>(employee));
                 return new ResponseDto<NoContentResult>().Success(200);
             }
             return new ResponseDto<NoContentResult>().Authorization();
         }
-        [HttpGet("{adminUserId}")]
-        public ResponseDto<AddHotelAdminModelDto> GetHotelAdminById([FromHeader] string Authorization, int adminUserId)
+        [HttpGet("{id}")]
+        public ResponseDto<ManagementUserResponse> GetHotelAdminById([FromHeader] string Authorization, int id)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            return _userService.GetHotelAdminByAdminUserId(adminUserId, keys);
+            return _userService.GetHotelAdminByAdminUserId(id, keys);
         }
         #endregion
 
         #region FOR Managers
 
         [HttpPost("{hotelid}")]
-        public ResponseDto<NoContentResult> AddManagementByHotelid([FromHeader] string Authorization, ManagementAddDto modelDto, int hotelid)
+        public ResponseDto<NoContentResult> AddManagementByHotelid([FromHeader] string Authorization, ManagementUserAddOrUpdateRequest request, int hotelid)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             var hotel = _hotelService.GetById(keys, hotelid);
-            if ((keys.companyid == hotel.Companyid) && keys.role == 2 || keys.role == 1)
+            if ((keys.companyid == hotel.data.Companyid) && keys.role == 2 || keys.role == 1)
             {
-                var entity = new UserRequest
-                {
-                    companyid = hotel.Companyid,
+                //var entity = new UserRequest
+                //{
+                //    companyid = hotel.data.Companyid,
 
-                    email = modelDto.email,
-                    password = modelDto.password,
-                    roleid = 3,
+                //    email = modelDto.email,
+                //    password = modelDto.password,
+                //    roleid = 3,
 
-                };
-                var user = _userService.Create(entity, keys);
+                //};
+                var userMap = _mapper.Map<UserRequest>(request);
+                userMap.roleid = 3;
+                userMap.companyid = hotel.data.Companyid;
+                var user = _userService.Create(userMap, keys);
 
-                var employees = new Employees
-                {
-                    Name = modelDto.name,
-                    Surname = modelDto.surname,
-                    StartDateOfWork = new DateTime(modelDto.StartDateOfWork.Value.Year, modelDto.StartDateOfWork.Value.Month, modelDto.StartDateOfWork.Value.Day, modelDto.StartDateOfWork.Value.Hour
-                    , modelDto.StartDateOfWork.Value.Minute, modelDto.StartDateOfWork.Value.Second),
-                    ExitEntryDate = modelDto.ExitEntryDate,
-                    employeestypeid = 3,
-                    CreatedDate = System.DateTime.Now,
-                    FloorNo = null,
-                    gender = true,
-                    hotelid = hotelid,
-                    ImageUrl = modelDto.imageurl,
-                    isActive = true,
-                    isDeleted = false,
-                    ModifyDate = System.DateTime.Now,
-                    phoneNumber = modelDto.phonenumber,
-                    userid = user.data.id
-                };
-                var employee = _employeesService.Create(keys, _mapper.Map<EmployeeRequest>(employees));
+                //var employees = new Employees
+                //{
+                //    Name = modelDto.name,
+                //    Surname = modelDto.surname,
+                //    StartDateOfWork = new DateTime(modelDto.StartDateOfWork.Value.Year, modelDto.StartDateOfWork.Value.Month, modelDto.StartDateOfWork.Value.Day, modelDto.StartDateOfWork.Value.Hour
+                //    , modelDto.StartDateOfWork.Value.Minute, modelDto.StartDateOfWork.Value.Second),
+                //    ExitEntryDate = modelDto.ExitEntryDate,
+                //    employeestypeid = 3,
+                //    CreatedDate = System.DateTime.Now,
+                //    FloorNo = null,
+                //    gender = true,
+                //    hotelid = hotelid,
+                //    ImageUrl = modelDto.imageurl,
+                //    isActive = true,
+                //    isDeleted = false,
+                //    ModifyDate = System.DateTime.Now,
+                //    phoneNumber = modelDto.phonenumber,
+                //    userid = user.data.id
+                //};
+                var employeeMap = _mapper.Map<EmployeeRequest>(request);
+                employeeMap.userid = user.data.id;
+                employeeMap.hotelid = hotelid;
+                employeeMap.employeestypeid = 3;
+                var employee = _employeesService.Create(keys, employeeMap);
                 var managementofhotel = new ManagementOfHotels
                 {
                     hotelid = hotelid,
@@ -239,21 +230,21 @@ namespace Worigo.API.Controllers
             return new ResponseDto<NoContentResult>().Authorization();
         }
         [HttpGet("{hotelid}")]
-        public ResponseDto<List<ManagementResponse>> GetManagementByHotelId([FromHeader] string Authorization, int hotelid)
+        public ResponseDto<List<ManagementUserResponse>> GetManagementByHotelId([FromHeader] string Authorization, int hotelid)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             var data = _userService.GetManagemetByHotelid(keys, hotelid);
-            return new ResponseDto<List<ManagementResponse>>().Success(data.data, 200);
+            return new ResponseDto<List<ManagementUserResponse>>().Success(data.data, 200);
         }
         [HttpPost]
-        public ResponseDto<NoContentResult> ManagementUpdate([FromHeader] string Authorization, ManagementAddDto modelDto)
+        public ResponseDto<NoContentResult> ManagementUpdate([FromHeader] string Authorization, ManagementUserAddOrUpdateRequest modelDto)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             return _employeesService.ManagerUpdate(modelDto, keys);
         }
 
         [HttpGet("{managementId}")]
-        public ResponseDto<ManagementResponse> GetManagementById([FromHeader] string Authorization, int managementId)
+        public ResponseDto<ManagementUserResponse> GetManagementById([FromHeader] string Authorization, int managementId)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             return _employeesService.GetManagementById(managementId, keys);
@@ -264,7 +255,7 @@ namespace Worigo.API.Controllers
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             var hotel = _hotelService.GetById(keys, hotelid);
-            if ((keys.companyid == hotel.Companyid) && keys.role == 2 || keys.role == 1)
+            if ((keys.companyid == hotel.data.Companyid) && keys.role == 2 || keys.role == 1)
             {
                 var managementvalue = _managementOfHotelService.GetManagementBymanagementIdByHotelid(managementid, hotelid);
                 managementvalue.isDeleted = true;
@@ -294,9 +285,9 @@ namespace Worigo.API.Controllers
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             var hotel = _hotelService.GetById(keys, model.hotelid);
-            if (keys.role == 2 & (keys.companyid == hotel.Companyid) || keys.role == 1)
+            if (keys.role == 2 & (keys.companyid == hotel.data.Companyid) || keys.role == 1)
             {
-                model.companyid = hotel.Companyid;
+                model.companyid = hotel.data.Companyid;
                 var user = _userService.Create(_mapper.Map<UserRequest>(model), keys);
                 model.userid = user.data.id;
                 var employee = _employeesService.Create(keys, _mapper.Map<EmployeeRequest>(model));
@@ -306,7 +297,7 @@ namespace Worigo.API.Controllers
             else if (keys.role == 3)
             {
                 _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, model.hotelid);
-                model.companyid = hotel.Companyid;
+                model.companyid = hotel.data.Companyid;
                 var user = _userService.Create(_mapper.Map<UserRequest>(model), keys);
                 model.userid = user.data.id;
                 var employee = _employeesService.Create(keys, _mapper.Map<EmployeeRequest>(model));
@@ -334,7 +325,7 @@ namespace Worigo.API.Controllers
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             var hotel = _hotelService.GetById(keys, hotelid);
-            if (keys.role == 2 && (hotel.Companyid == keys.companyid) || keys.role == 1)
+            if (keys.role == 2 && (hotel.data.Companyid == keys.companyid) || keys.role == 1)
             {
                 var list = _employeesService.GetDirectoryByHotelid(hotelid, keys);
                 return new ResponseDto<List<UserAndDirectoryResponse>>().Success(list.data, 200);

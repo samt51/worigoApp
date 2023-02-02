@@ -58,11 +58,11 @@ namespace Worigo.API.Controllers
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             var hotel = _hotelService.GetById(keys, hotelid);
-            if ((keys.companyid == hotel.Companyid) && keys.role == 2 || keys.role == 1)
+            if ((keys.companyid == hotel.data.Companyid) && keys.role == 2 || keys.role == 1)
             {
                 var user = new User
                 {
-                    companyid = hotel.Companyid,
+                    companyid = hotel.data.Companyid,
                     email = entity.email,
                     password = entity.password,
                     roleid = 4
@@ -88,7 +88,7 @@ namespace Worigo.API.Controllers
                 _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, hotelid);
                 var user = new User
                 {
-                    companyid = hotel.Companyid,
+                    companyid = hotel.data.Companyid,
                     email = entity.email,
                     password = entity.password,
                     roleid = 4
@@ -128,7 +128,7 @@ namespace Worigo.API.Controllers
             commentSingularData.data.phoneNumber = entity.phoneNumber;
             commentSingularData.data.Surname = entity.Surname;
             commentSingularData.data.FloorNo = entity.FloorNo;
-            if ((keys.companyid == hotel.Companyid) && keys.role == 2 || keys.role == 1 || keys.userId == commentSingularData.data.userid)
+            if ((keys.companyid == hotel.data.Companyid) && keys.role == 2 || keys.role == 1 || keys.userId == commentSingularData.data.userid)
             {
                 _employeesService.Update(keys,_mapper.Map<EmployeeRequest>(commentSingularData));
                 return new  ResponseDto<NoContentResult>().Success(200);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Worigo.Core.Dtos.JoinClass;
+using Worigo.Core.Dtos.Comment.Response;
 using Worigo.Core.Dtos.Reports.HotelGeneralPuan;
 using Worigo.Core.Exceptions;
 using Worigo.DataAccess.Abstrack;
@@ -12,7 +12,7 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
 {
     public class EfCommentDal : EfRepositoryDal<Comment, DataContext>, ICommentDal
     {
-        public CommentListJoin GetByIdJoin(int id)
+        public CommentResponse GetByIdJoin(int id)
         {
             using (var db = new DataContext())
             {
@@ -20,19 +20,21 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
                                 join d2 in db.Employees on d1.employeesid equals d2.id
                                 join d3 in db.employeesType on d2.employeestypeid equals d3.id
                                 join d4 in db.Hotel on d2.hotelid equals d4.id
-                                select new CommentListJoin
+                                select new CommentResponse
                                 {
                                     Id = d1.Id,
                                     EmployeeNameAndSurname = d2.Name + " " + d2.Surname,
                                     Commentary = d1.Commentary,
-                                    EmployeePoint = d1.Point,
+                                    Point = d1.Point,
                                     EmployeesType = d3.TypeName,
-                                    Hotel = d4.HotelName
+                                    Hotel = d4.HotelName,
+                                    hotelid = d4.id
                                 };
-                return joinsorgu.First();
+                var data= joinsorgu.FirstOrDefault();
+                return data;
             }
         }
-        public List<CommentListJoin> GetCommentByHotelid(int hotelid)
+        public List<CommentResponse> GetCommentByHotelid(int hotelid)
         {
             using (var db = new DataContext())
             {
@@ -40,23 +42,23 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
                                join d2 in db.Hotel on d1.hotelid equals d2.id
                                join d3 in db.Employees on d1.employeesid equals d3.id
                                join d4 in db.employeesType on d3.employeestypeid equals d4.id
-                               select new CommentListJoin
+                               select new CommentResponse
                                {
                                    Id = d1.Id,
                                    Commentary = d1.Commentary,
                                    EmployeeNameAndSurname = d3.Name + " " + d3.Surname,
                                    Hotel = d2.HotelName,
                                    EmployeesType = d4.TypeName,
-                                   EmployeePoint = d1.Point,
-                                   ContentsPoint = d1.contentsPoint,
-                                   SpeedPoint = d1.speedPoint,
+                                   Point = d1.Point,
+                                   contentsPoint = d1.contentsPoint,
+                                   speedPoint = d1.speedPoint,
                                    CreateDate = d1.CreatedDate,
                                    GeneralPoint = (d1.Point + d1.contentsPoint + d1.speedPoint) / 3
                                };
                 return joinList.OrderByDescending(x => x.CreateDate).ToList();
             }
         }
-        public List<CommentListJoin> GetEmployeesOfCommentByHotelidAndEmployeesid(int hotelid, int employeeid)
+        public List<CommentResponse> GetEmployeesOfCommentByHotelidAndEmployeesid(int hotelid, int employeeid)
         {
             throw new System.NotImplementedException();
         }

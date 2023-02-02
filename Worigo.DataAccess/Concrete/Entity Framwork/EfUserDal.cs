@@ -4,6 +4,7 @@ using Worigo.Core.Dtos.Employee.Request;
 using Worigo.Core.Dtos.JoinClass;
 using Worigo.Core.Dtos.ManagerDto.Dto;
 using Worigo.Core.Dtos.ManagerDto.Response;
+using Worigo.Core.Dtos.User.Dto;
 using Worigo.Core.Dtos.User.Response;
 using Worigo.Core.Encryption;
 using Worigo.Core.Exceptions;
@@ -68,16 +69,16 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
             }
         }
 
-        public AddHotelAdminModelDto GetHotelAdminByAdminUserId(int adminUserId)
+        public ManagementUserResponse GetHotelAdminByAdminUserId(int adminUserId)
         {
             var userData = GetById(adminUserId);
             using (var db = new DataContext())
             {
                 var join = from d1 in db.Employees.Where(x => x.userid == adminUserId)
                            join d2 in db.Companies on userData.companyid equals d2.id
-                           select new AddHotelAdminModelDto
+                           select new ManagementUserResponse
                            {
-                               AdminUserId = adminUserId,
+                               Id = adminUserId,
                                name = d1.Name,
                                surname = d1.Surname,
                                CompanyName = d2.name,
@@ -87,11 +88,12 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
                                imageurl = d1.ImageUrl,
                                phonenumber = d1.phoneNumber
                            };
-                return join.First();
+                var data = join.FirstOrDefault();
+                return data;
             }
         }
 
-        public List<AddHotelAdminModelDto> GetHotelAdminByCompaniesId(int companiesid)
+        public List<ManagementUserResponse> GetHotelAdminByCompaniesId(int companiesid)
         {
             using (var db = new DataContext())
             {
@@ -99,9 +101,10 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
                                join d2 in db.Employees on d1.id equals d2.userid
                                join d3 in db.employeesType on d2.employeestypeid equals d3.id
                                join d4 in db.Companies on d1.companyid equals d4.id
-                               select new AddHotelAdminModelDto
+                               where d1.isActive == true && d1.isDeleted == false && d2.isActive == true && d2.isDeleted == false && d3.isDeleted == false && d3.isActive == true && d4.isActive == true && d4.isDeleted == false
+                               select new ManagementUserResponse
                                {
-                                   AdminUserId = d1.id,
+                                   Id = d1.id,
                                    name = d2.Name,
                                    surname = d2.Surname,
                                    email = d1.email,
@@ -156,52 +159,33 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
             }
         }
 
-        public List<ManagementResponse> GetManagemetByHotelid(int hotelid)
+        public List<ManagementUserResponse> GetManagemetByHotelid(int hotelid)
         {
             using (var db = new DataContext())
             {
-                var response = new List<ManagementResponse>();
-
                 var listmanagement = from d1 in db.Hotel.Where(x => x.id == hotelid && x.isDeleted == false && x.isActive == true)
                                      join d2 in db.Users.Where(x => x.roleid == 3 && x.isDeleted == false && x.isActive == true) on d1.Companyid equals d2.companyid
                                      join d3 in db.Employees on d2.id equals d3.userid
                                      join d4 in db.Companies on d1.Companyid equals d4.id
                                      join d5 in db.employeesType on d3.employeestypeid equals d5.id
-                                     select new ManagementResponse
+                                     select new ManagementUserResponse
                                      {
-                                         ManagementId = d2.id,
+                                         Id = d2.id,
                                          name = d3.Name,
                                          surname = d3.Surname,
                                          phonenumber = d3.phoneNumber,
                                          StartDateOfWork = d3.StartDateOfWork,
                                          ExitEntryDate = d3.ExitEntryDate,
-                                         companiesname = d4.name,
-                                         employeestypename = d5.TypeName,
+                                         CompanyName = d4.name,
+                                         EmployeeTypeName = d5.TypeName,
+                                         employeestypeid = d5.id,
                                          gender = d3.gender,
                                          email = d2.email,
                                          imageurl = d3.ImageUrl,
                                          password = CommodMethods.ConvertDecrypt(d2.password),
+                                         companyId = d4.id
                                      };
-                var count = listmanagement.ToList();
-
-
-
-                var hotelEmployee = from manager in listmanagement
-                                    join managerhotel in db.ManagementOfHotels.Where(x => x.isActive == true && x.isDeleted == false) on manager.ManagementId equals managerhotel.managementid
-                                    join hotel in db.Hotel on managerhotel.hotelid equals hotel.id
-                                    select new ManagementResponseHotelResponse { HotelId = hotel.id, HotelName = hotel.HotelName, ManagerUserId = managerhotel.managementid };
-
-
-                for (int i = 0; i < count.Count(); i++)
-                {
-                    count[i].HotelList = hotelEmployee.Where(x => x.ManagerUserId == count[i].ManagementId).ToList();
-                    response.Add(count[i]);
-                }
-
-
-
-
-
+                var response = listmanagement.ToList();
 
                 return response;
             }
@@ -246,13 +230,7 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
                 return joinsorgu.ToList();
             }
         }
-        public User LastAddUser()
-        {
-            using (var db = new DataContext())
-            {
-                return db.Users.Where(x => x.isDeleted == false).OrderByDescending(x => x.CreatedDate).FirstOrDefault();
-            }
-        }
+
 
         public UserResponse UserGetByIdJoin(int id)
         {

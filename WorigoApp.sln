@@ -9,13 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.DataAccess", "Worigo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.Business", "Worigo.Business\Worigo.Business.csproj", "{68297B33-3DBD-43E1-A526-25A0C96207E2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.API", "Worigo.API\Worigo.API.csproj", "{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.Core", "Worigo.Core\Worigo.Core.csproj", "{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worigo.Test", "Worigo.Test\Worigo.Test.csproj", "{A09CC930-7465-4DC3-94FB-2649DC62BF1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "api\api.csproj", "{F1F6868C-E1DC-435A-9668-0C5B9802ADE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api", "api\api.csproj", "{F1F6868C-E1DC-435A-9668-0C5B9802ADE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{68297B33-3DBD-43E1-A526-25A0C96207E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68297B33-3DBD-43E1-A526-25A0C96207E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68297B33-3DBD-43E1-A526-25A0C96207E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C3950B4-BC4F-4697-A7AC-0506EE132E2D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43DDDEAB-7B14-40F5-B06F-F69486F83ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU

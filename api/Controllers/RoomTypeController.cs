@@ -8,6 +8,8 @@ using Worigo.Core.Dtos.Employee.Response;
 using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
 using Worigo.Core.Dtos.ListDto;
 using Worigo.Core.Dtos.ResponseDtos;
+using Worigo.Core.Dtos.RoomType.Request;
+using Worigo.Core.Dtos.RoomType.Response;
 using Worigo.Entity.Concrete;
 
 namespace Worigo.API.Controllers
@@ -26,69 +28,46 @@ namespace Worigo.API.Controllers
 
         }
         [HttpGet]
-        public IActionResult GetAll([FromHeader] string Authorization)
+        public ResponseDto<List<RoomTypeResponse>> GetAll([FromHeader] string Authorization)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            var list = _roomTypeService.GetAll();
-            var listdto = _mapper.Map<List<RoomTypeDto>>(list);
-            return CreateActionResult(ResponseDto<List<RoomTypeDto>>.Success(listdto, 200));
+            return _roomTypeService.GetAll(keys);
+
         }
         [HttpGet("{id}")]
-        public IActionResult GetById([FromHeader] string Authorization, int id)
+        public ResponseDto<RoomTypeResponse> GetById([FromHeader] string Authorization, int id)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            var entityid = _roomTypeService.GetById(id);
-            var singulardto = _mapper.Map<RoomTypeDto>(entityid);
-            return CreateActionResult(ResponseDto<RoomTypeDto>.Success(singulardto, 200));
+            return _roomTypeService.GetById(id, keys);
         }
         [HttpPost]
-        public IActionResult Add([FromHeader] string Authorization, RoomTypeDto roomTypeDto)
+        public ResponseDto<RoomTypeResponse> Add([FromHeader] string Authorization, RoomTypeAddOrUpdateRequest request)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            if(keys.role==1)
-            {
-                var entity = new RoomType
-                {
-                    CreatedDate = System.DateTime.Now,
-                    isActive =true,
-                    isDeleted = false,
-                    ModifyDate = System.DateTime.Now,
-                    typeName = roomTypeDto.typeName
-                };
-                _roomTypeService.Create(entity);
-                return CreateActionResult(ResponseDto<RoomType>.Success(200));
-            }
-            return CreateActionResult(ResponseDto<List<EmployeeResponse>>.Authorization());
+            return _roomTypeService.Create(request, keys);
 
         }
         [HttpPost]
-        public IActionResult Update([FromHeader] string Authorization, RoomTypeDto roomTypeDto)
+        public ResponseDto<RoomTypeResponse> Update([FromHeader] string Authorization, RoomTypeAddOrUpdateRequest request)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            if (keys.role == 1)
-            {
-                var entity = _roomTypeService.GetById(roomTypeDto.id);
-                entity.ModifyDate = System.DateTime.Now;
-                entity.typeName = roomTypeDto.typeName;
-                _roomTypeService.Update(entity);
-                return CreateActionResult(ResponseDto<RoomType>.Success(200));
-            }
-            return CreateActionResult(ResponseDto<List<RoomType>>.Authorization());
-        }
-        [HttpPost("{id}")]
-        public IActionResult Delete([FromHeader] string Authorization, int id)
-        {
-            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            if (keys.role == 1)
-            {
-                var entity = _roomTypeService.GetById(id);
-                entity.isDeleted = true;
-                entity.ModifyDate = System.DateTime.Now;
-                _roomTypeService.Update(entity);
-                return CreateActionResult(ResponseDto<RoomType>.Success(200));
-            }
-            return CreateActionResult(ResponseDto<List<RoomType>>.Authorization());
+            return _roomTypeService.Update(request, keys);
 
         }
+        //[HttpPost("{id}")]
+        //public IActionResult Delete([FromHeader] string Authorization, int id)
+        //{
+        //    TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+        //    if (keys.role == 1)
+        //    {
+        //        var entity = _roomTypeService.GetById(id);
+        //        entity.isDeleted = true;
+        //        entity.ModifyDate = System.DateTime.Now;
+        //        _roomTypeService.Update(entity);
+        //        return CreateActionResult(ResponseDto<RoomType>.Success(200));
+        //    }
+        //    return CreateActionResult(ResponseDto<List<RoomType>>.Authorization());
+
+        //}
     }
 }

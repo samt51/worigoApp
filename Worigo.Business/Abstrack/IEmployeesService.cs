@@ -4,9 +4,9 @@ using Worigo.Core.Dtos.DirectorsDepartmans.Response;
 using Worigo.Core.Dtos.Employee.Request;
 using Worigo.Core.Dtos.Employee.Response;
 using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
-using Worigo.Core.Dtos.ManagerDto.Request;
 using Worigo.Core.Dtos.ManagerDto.Response;
 using Worigo.Core.Dtos.ResponseDtos;
+using Worigo.Core.Dtos.User.Dto;
 
 namespace Worigo.Business.Abstrack
 {
@@ -19,8 +19,8 @@ namespace Worigo.Business.Abstrack
         ResponseDto<EmployeeResponse> Create(TokenKeys data, EmployeeRequest request);
         ResponseDto<EmployeeResponse> Update(TokenKeys data, EmployeeRequest request);
         ResponseDto<EmployeeResponse> GetById(int id,TokenKeys keys);
-        ResponseDto<NoContentResult> ManagerUpdate(ManagementAddDto model,TokenKeys keys);
-        ResponseDto<ManagementResponse> GetManagementById(int managerUserId, TokenKeys data);
+        ResponseDto<NoContentResult> ManagerUpdate(ManagementUserAddOrUpdateRequest model,TokenKeys keys);
+        ResponseDto<ManagementUserResponse> GetManagementById(int managerUserId, TokenKeys data);
         ResponseDto<EmployeeResponse> GetEmployeeByUserId(int userId, TokenKeys data);
     }
 }

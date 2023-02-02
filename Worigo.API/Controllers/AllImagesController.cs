@@ -1,15 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using Worigo.Business.Abstrack;
-using Worigo.Core.Dtos.ListDto;
-using Worigo.Core.Dtos.ResponseDtos;
-using Worigo.Entity.Concrete;
-
-namespace Worigo.API.Controllers
+﻿namespace Worigo.API.Controllers
 {
-    [Route("[controller]/[action]")]
-    [ApiController]
+    //[Route("[controller]/[action]")]
+    //[ApiController]
     //public class AllImagesController : CustomBaseController
     //{
     //    private IAllImagesService _allImagesService;

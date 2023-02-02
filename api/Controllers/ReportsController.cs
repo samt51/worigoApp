@@ -44,7 +44,7 @@ namespace Worigo.API.Controllers
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             var hotel = _hotelService.GetById(keys, hotelid);
             var data = _departmanService.DepartmanCommentRateResponse(hotelid, departmanid, keys);
-            if (keys.role == 2 && (keys.companyid == hotel.Companyid) || keys.role == 1)
+            if (keys.role == 2 && (keys.companyid == hotel.data.Companyid) || keys.role == 1)
             {
                 return data;
             }

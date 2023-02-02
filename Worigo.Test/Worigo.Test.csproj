@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Worigo.API\Worigo.API.csproj" />
     <ProjectReference Include="..\Worigo.Business\Worigo.Business.csproj" />
   </ItemGroup>
 

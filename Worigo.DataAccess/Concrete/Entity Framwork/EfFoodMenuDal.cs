@@ -9,7 +9,7 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
 {
     public class EfFoodMenuDal : EfRepositoryDal<FoodMenu, DataContext>, IFoodMenuDal
     {
-        public List<NewMenuListResponse> GetMenuByHotelId(int hotelId)
+        public List<FoodMenuResponse> GetMenuByHotelId(int hotelId)
         {
             using (var db = new DataContext())
             {
@@ -17,7 +17,7 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
                 var hotel = db.Hotel.ToList();
                 var join = from d1 in menulist
                            join d2 in hotel on d1.hotelid equals d2.id
-                           select new NewMenuListResponse
+                           select new FoodMenuResponse
                            {
                                id = d1.id,
                                hotel = d2.HotelName,

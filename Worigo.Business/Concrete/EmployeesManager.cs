@@ -11,6 +11,7 @@ using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
 using Worigo.Core.Dtos.ManagerDto.Request;
 using Worigo.Core.Dtos.ManagerDto.Response;
 using Worigo.Core.Dtos.ResponseDtos;
+using Worigo.Core.Dtos.User.Dto;
 using Worigo.Core.Dtos.User.Request;
 using Worigo.Core.Exceptions;
 using Worigo.Core.Extension;
@@ -24,14 +25,14 @@ namespace Worigo.Business.Concrete
         private readonly IEmployeesDal _employeesDal;
         private readonly IManagementOfHotelService _managementOfHotelsDal;
         private readonly IUserService _userDal;
-        private readonly IHotelService _hotelDal;
+        private readonly IHotelDal _hotelDal;
         private readonly IUserRoleService _userRoleDal;
         private readonly IEmployeesTypeService _employeesTypeDal;
         private readonly IMapper _mapper;
         private readonly IDirectorsDepartmansService _directorsDepartmansService;
 
         public EmployeesManager(IUserRoleService userRoleDal, IEmployeesTypeService employeesTypeDal,
-            IUserService userDal, IHotelService hotelDal, IEmployeesDal employeesDal, IDirectorsDepartmansService directorsDepartmansService,
+            IUserService userDal, IHotelDal hotelDal, IEmployeesDal employeesDal, IDirectorsDepartmansService directorsDepartmansService,
             IManagementOfHotelService managementOfHotelsDal, IMapper mapper)
         {
             _employeesDal = employeesDal;
@@ -56,7 +57,7 @@ namespace Worigo.Business.Concrete
 
         public ResponseDto<List<EmployeeResponse>> GetEmployeesByHotelId(TokenKeys data, int hotelid)
         {
-            var hotel = _hotelDal.GetById(data, hotelid);
+            var hotel = _hotelDal.GetById(hotelid);
             var employeeResponse = _employeesDal.GetEmployeesByHotelId(hotelid);
             if (data.role == 2 && (data.companyid == hotel.Companyid) || data.role == 1)
             {
@@ -80,7 +81,7 @@ namespace Worigo.Business.Concrete
         public ResponseDto<List<UserAndDirectoryResponse>> GetDirectoryByHotelidAndDepartmanId(TokenKeys keys, int hotelid, int departmanid)
         {
 
-            var hotel = _hotelDal.GetById(keys, hotelid);
+            var hotel = _hotelDal.GetById(hotelid);
             if (keys.role == 2 && (keys.companyid == hotel.Companyid) || keys.role == 1)
             {
                 var directoryAndHotel = _employeesDal.GetDirectoryByHotelidAndDepartmanId(hotelid, departmanid);
@@ -95,27 +96,27 @@ namespace Worigo.Business.Concrete
 
             return new ResponseDto<List<UserAndDirectoryResponse>>().Authorization();
         }
-        public ResponseDto<ManagementResponse> GetManagementById(int managerUserId, TokenKeys keys)
+        public ResponseDto<ManagementUserResponse> GetManagementById(int managerUserId, TokenKeys keys)
         {
             var management = _userDal.GetById(managerUserId, keys);
             if (keys.userId == management.data.id || keys.role == 2 && (management.data.companyid == keys.companyid) || keys.role == 1)
             {
                 var managementData = _employeesDal.GetManagementById(managerUserId);
-                return new ResponseDto<ManagementResponse>().Success(managementData, 200);
+                return new ResponseDto<ManagementUserResponse>().Success(managementData, 200);
             }
-            return new ResponseDto<ManagementResponse>().Authorization();
+            return new ResponseDto<ManagementUserResponse>().Authorization();
         }
 
-        public ResponseDto<NoContentResult> ManagerUpdate(ManagementAddDto model, TokenKeys keys)
+        public ResponseDto<NoContentResult> ManagerUpdate(ManagementUserAddOrUpdateRequest model, TokenKeys keys)
         {
             var employee = _employeesDal.GetById(model.id);
             var user = _userDal.GetById(employee.userid, keys);
             if (keys.userId == user.data.id || keys.role == 2 && (keys.companyid == user.data.companyid) || keys.role == 1)
             {
-                employee.Name = model.name;
-                employee.Surname = model.surname;
-                employee.phoneNumber = model.phonenumber;
-                employee.ImageUrl = model.imageurl;
+                employee.Name = model.Name;
+                employee.Surname = model.Surname;
+                employee.phoneNumber = model.phoneNumber;
+                employee.ImageUrl = model.ImageUrl;
                 employee.StartDateOfWork = model.StartDateOfWork;
                 employee.ExitEntryDate = model.ExitEntryDate;
                 user.data.password = CommodMethods.ConvertToEncryp(user.data.password);

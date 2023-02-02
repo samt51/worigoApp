@@ -1,17 +1,11 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Worigo.Business.Abstrack;
 using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
-using Worigo.Core.Dtos.JoinClass.ServiceValueJoin;
-using Worigo.Core.Dtos.ListDto;
 using Worigo.Core.Dtos.ResponseDtos;
 using Worigo.Core.Dtos.ServicesValue.Request;
 using Worigo.Core.Dtos.ServicesValue.Response;
-using Worigo.Core.Dtos.ServiceValueOfEmployeeType.Request;
-using Worigo.Entity.Concrete;
 
 namespace Worigo.API.Controllers
 {
