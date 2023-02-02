@@ -69,12 +69,12 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
             using (var db=new DataContext())
             {
                 GetDirectoryByHotelIdAndId(request.hotelid, (int)request.directoryEmployeeId);
-                var departmentRemove = db.DirectorsDepartmans.Where(x => x.departmanid == request.currentDepartmentId && x.directoryid == request.directoryEmployeeId).FirstOrDefault();
-                if (departmentRemove == null)
-                    throw new NotFoundException("This Manager Is Not Affiliated With This Department");
-                departmentRemove.isActive = false;
-                departmentRemove.isDeleted = true;
-                var departmentUpdate= Update(departmentRemove);
+                //var departmentRemove = db.DirectorsDepartmans.Where(x => x.departmanid == request.currentDepartmentId && x.directoryid == request.directoryEmployeeId).FirstOrDefault();
+                //if (departmentRemove == null)
+                //    throw new NotFoundException("This Manager Is Not Affiliated With This Department");
+                //departmentRemove.isActive = false;
+                //departmentRemove.isDeleted = true;
+                //var departmentUpdate= Update(departmentRemove);
             }
         }
     }

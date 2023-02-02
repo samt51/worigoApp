@@ -13,20 +13,20 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
         {
             using (var db = new DataContext())
             {
-                var joinlist = from d1 in db.Hotel
-                               join d2 in db.Companies on d1.Companyid equals d2.id
+                var joinlist = from d1 in db.Companies.Where(x => x.id == companyid)
+                               join d2 in db.Hotel on d1.id equals d2.Companyid
                                where d1.isActive == true && d1.isDeleted == false && d2.isActive == true && d2.isDeleted == false
                                select new HotelResponse
                                {
-                                   NumberOfStar = d1.NumberOfStar,
-                                   Adress = d1.Adress,
-                                   CompanyName = d2.name,
-                                   Email = d1.Email,
-                                   HotelName = d1.HotelName,
-                                   id = d1.id,
-                                   ImageUrl = d1.ImageUrl,
-                                   PhoneNumber = d1.PhoneNumber,
-                                   Companyid = d2.id
+                                   NumberOfStar = d2.NumberOfStar,
+                                   Adress = d2.Adress,
+                                   CompanyName = d1.name,
+                                   Email = d2.Email,
+                                   HotelName = d2.HotelName,
+                                   id = d2.id,
+                                   ImageUrl = d2.ImageUrl,
+                                   PhoneNumber = d2.PhoneNumber,
+                                   Companyid = d1.id
                                };
                 return joinlist.ToList();
             }
@@ -61,12 +61,12 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
             }
         }
 
-         
 
-        
 
-        
-         
-       
+
+
+
+
+
     }
 }

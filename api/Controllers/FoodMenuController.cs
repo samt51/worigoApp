@@ -33,102 +33,30 @@ namespace Worigo.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult NewMenu([FromHeader] string Authorization, AddNewMenuRequest model)
+        public ResponseDto<FoodMenuResponse> NewMenu([FromHeader] string Authorization, FoodMenuRequest request)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            var hotel = _hotelService.GetById(keys, model.hotelid);
-            var mapper = _mapper.Map<FoodMenu>(model);
-            if (keys.role == 2 && (keys.companyid == hotel.Companyid) || keys.role == 1)
-            {
-                _foodMenuService.Create(mapper);
-                return CreateActionResult(ResponseDto<NoContentResult>.Success(200));
-            }
-            else if (keys.role == 3 || keys.role == 5)
-            {
-                if (keys.role == 5)
-                {
-                    _directorsDepartmansService.GetDirectoryByHotelIdAndId(model.hotelid, keys.userId);
-                    _foodMenuService.Create(mapper);
-                    return CreateActionResult(ResponseDto<NoContentResult>.Success(200));
-                }
-                _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, model.hotelid);
-                _foodMenuService.Create(mapper);
-                return CreateActionResult(ResponseDto<NoContentResult>.Success(200));
-            }
-            return CreateActionResult(ResponseDto<NoContentResult>.Authorization());
+            return _foodMenuService.Create(request, keys);
+
         }
         [HttpGet("{hotelid}")]
-        public IActionResult MenuListByHotelId([FromHeader] string Authorization, int hotelid)
+        public ResponseDto<List<FoodMenuResponse>> MenuListByHotelId([FromHeader] string Authorization, int hotelid)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            var hotel = _hotelService.GetById(keys, hotelid);
-            var responselist = _foodMenuService.GetMenuByHotelId(hotelid);
-            if (keys.role == 2 && (keys.companyid == hotel.Companyid) || keys.role == 1)
-            {
-                return CreateActionResult(ResponseDto<List<NewMenuListResponse>>.Success(responselist, 200));
-            }
-            else if (keys.role == 3 || keys.role == 5)
-            {
-                if (keys.role == 5)
-                {
-                    _directorsDepartmansService.GetDirectoryByHotelIdAndId(hotelid, keys.userId);
-                    return CreateActionResult(ResponseDto<List<NewMenuListResponse>>.Success(responselist, 200));
+            return _foodMenuService.GetMenuByHotelId(hotelid, keys);
 
-                }
-                _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, hotelid);
-                return CreateActionResult(ResponseDto<List<NewMenuListResponse>>.Success(responselist, 200));
-            }
-            return CreateActionResult(ResponseDto<NoContentResult>.Authorization());
         }
         [HttpGet("{id}")]
-        public IActionResult GetMenuById([FromHeader] string Authorization, int id)
+        public ResponseDto<FoodMenuResponse> GetMenuById([FromHeader] string Authorization, int id)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            var menuData = _foodMenuService.GetById(id);
-            var hotel = _hotelService.GetById(keys, menuData.hotelid);
-            var menuDto = _mapper.Map<NewMenuListResponse>(menuData);
-            if (keys.role == 2 && (keys.companyid == hotel.Companyid) || keys.role == 1)
-            {             
-                return CreateActionResult(ResponseDto<NewMenuListResponse>.Success(menuDto, 200));
-            }
-            else if (keys.role == 3)
-            {
-                _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, menuData.hotelid);
-                return CreateActionResult(ResponseDto<NewMenuListResponse>.Success(menuDto, 200));
-            }
-            else if (keys.role == 5)
-            {
-                _directorsDepartmansService.GetDirectoryByHotelIdAndId(menuData.hotelid, keys.userId);
-                return CreateActionResult(ResponseDto<NewMenuListResponse>.Success(menuDto, 200));
-            }
-            else
-                return CreateActionResult(ResponseDto<NoContentResult>.Authorization());
+            return _foodMenuService.GetById(id, keys);
         }
         [HttpPost]
-        public IActionResult MenuUpdate([FromHeader] string Authorization, AddNewMenuRequest model)
+        public ResponseDto<FoodMenuResponse> MenuUpdate([FromHeader] string Authorization, FoodMenuRequest model)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            var hotel = _hotelService.GetById(keys, model.hotelid);
-            var mapdto = _mapper.Map<FoodMenu>(model);
-            if (keys.role == 2 && (keys.companyid == hotel.Companyid) || keys.role == 1)
-            {
-                _foodMenuService.Update(mapdto);
-                return CreateActionResult(ResponseDto<NewMenuListResponse>.Success( 200));
-            }
-            else if (keys.role == 3)
-            {
-                _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, model.hotelid);
-                _foodMenuService.Update(mapdto);
-                return CreateActionResult(ResponseDto<NewMenuListResponse>.Success( 200));
-            }
-            else if (keys.role == 5)
-            {
-                _directorsDepartmansService.GetDirectoryByHotelIdAndId(model.hotelid, keys.userId);
-                _foodMenuService.Update(mapdto);
-                return CreateActionResult(ResponseDto<NewMenuListResponse>.Success( 200));
-            }
-            else
-                return CreateActionResult(ResponseDto<NoContentResult>.Authorization());
+            return _foodMenuService.Update(model, keys);
 
         }
     }

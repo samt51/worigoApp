@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System.Collections.Generic;
 using Worigo.Business.Abstrack;
-using Worigo.Core.Dtos.JoinClass;
+using Worigo.Core.Dtos.Comment.Request;
+using Worigo.Core.Dtos.Comment.Response;
 using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
 using Worigo.Core.Dtos.Reports.HotelGeneralPuan;
 using Worigo.Core.Dtos.ResponseDtos;
@@ -12,58 +14,74 @@ namespace Worigo.Business.Concrete
     public class CommentManager : ICommentService
     {
         private readonly ICommentDal _commentDal;
-        private readonly IHotelDal _hotelDal;
-        private readonly IManagementOfHotelsDal _managementOfHotelsDal;
-        public CommentManager(ICommentDal commentDal, IHotelDal hotelDal, IManagementOfHotelsDal managementOfHotelsDal)
+        private readonly IHotelService _hotelService;
+        private readonly IManagementOfHotelService _managementOfHotelService;
+        private readonly IMapper _mapper;
+        public CommentManager(ICommentDal commentDal, IMapper mapper, IHotelService hotelService, IManagementOfHotelService managementOfHotelService)
         {
             _commentDal = commentDal;
-            _hotelDal = hotelDal;
-            _managementOfHotelsDal = managementOfHotelsDal;
+            _hotelService = hotelService;
+            _mapper = mapper;
+            _managementOfHotelService = managementOfHotelService;
         }
-
-        public List<CommentListJoin> commentListJoins(int hotelid)
+        public ResponseDto<List<CommentResponse>> commentListJoins(int hotelid, TokenKeys keys)
         {
-            return _commentDal.GetCommentByHotelid(hotelid);
+            var hotel = _hotelService.GetById(keys, hotelid);
+            if ((keys.companyid == hotel.data.Companyid) && keys.role == 2 || keys.role == 1)
+            {
+                var listcomment = _commentDal.GetCommentByHotelid(hotelid);
+                return new ResponseDto<List<CommentResponse>>().Success(listcomment, 200);
+            }
+            else if (keys.role == 3)
+            {
+                _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, hotelid);
+                var listcomment = _commentDal.GetCommentByHotelid(hotelid);
+                return new ResponseDto<List<CommentResponse>>().Success(listcomment, 200);
+            }
+            return new ResponseDto<List<CommentResponse>>().Authorization();
         }
 
-        public Comment Create(Comment entity)
+        public ResponseDto<CommentResponse> Create(CommentAddOrUpdateRequest request, TokenKeys keys)
         {
-            return _commentDal.Create(entity);
+            var map = _mapper.Map<Comment>(request);
+            var response = _commentDal.Create(map);
+            return new ResponseDto<CommentResponse>().Success(_mapper.Map<CommentResponse>(response), 200);
         }
-
-        public List<Comment> GetAll()
+        public ResponseDto<CommentResponse> GetById(int id, TokenKeys keys)
         {
-            return _commentDal.GetAll(x => x.isDeleted == false);
+            var comment = _commentDal.GetByIdJoin(id);
+            var hotel = _hotelService.GetById(keys, comment.hotelid);
+            if (keys.role == 3)
+                _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, comment.hotelid);
+            if (keys.role == 2 && keys.companyid == hotel.data.Companyid || keys.role == 3 || keys.role == 1)
+            {
+                return new ResponseDto<CommentResponse>().Success(comment, 200);
+            }
+            return new ResponseDto<CommentResponse>().Authorization();
         }
-
-        public Comment GetById(int id)
+        public ResponseDto<CommentResponse> Update(CommentAddOrUpdateRequest request, TokenKeys keys)
         {
-            return _commentDal.GetById(id);
+            var data = _commentDal.GetById(request.Id);
+            data.employeesid = request.employeesid;
+            data.Commentary = request.Commentary;
+            data.Point = request.Point;
+            data.speedPoint = request.speedPoint;
+            data.contentsPoint = request.contentsPoint;
+            data.ModifyDate = System.DateTime.Now;
+            var response = _commentDal.Update(data);
+            return new ResponseDto<CommentResponse>().Success(_mapper.Map<CommentResponse>(data), 200);
         }
-
-        public CommentListJoin GetByIdJoin(int id)
-        {
-            return _commentDal.GetByIdJoin(id);
-        }
-
-
-
-        public Comment Update(Comment entity)
-        {
-            return _commentDal.Update(entity);
-        }
-
         ResponseDto<HotelGeneralPointResponse> ICommentService.HotelGeneralPointByHotelId(int hotelid, TokenKeys keys)
         {
-            var hotel = _hotelDal.GetById(hotelid);
-            if (keys.role == 2 && (keys.companyid == hotel.Companyid) || keys.role == 1)
+            var hotel = _hotelService.GetById(keys, hotelid);
+            if (keys.role == 2 && (keys.companyid == hotel.data.Companyid) || keys.role == 1)
             {
                 var GeneralHotelPoint = _commentDal.HotelGeneralPointByHotelId(hotelid);
                 return new ResponseDto<HotelGeneralPointResponse>().Success(GeneralHotelPoint, 200);
             }
             if (keys.role == 3)
             {
-                _managementOfHotelsDal.GetManagementBymanagementIdByHotelid(keys.userId, hotelid);
+                _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, hotelid);
                 var GeneralHotelPoint = _commentDal.HotelGeneralPointByHotelId(hotelid);
                 return new ResponseDto<HotelGeneralPointResponse>().Success(GeneralHotelPoint, 200);
             }

@@ -64,17 +64,16 @@ namespace Worigo.API.Controllers
             return hotelSingular;
 
         }
-        [HttpPost("{companiesid}")]
-        public ResponseDto<HotelResponse> Add(HotelAddOrUpdateRequest hoteldto, [FromHeader] string Authorization, int companiesid)
+        [HttpPost]
+        public ResponseDto<HotelResponse> Add(HotelAddOrUpdateRequest hoteldto, [FromHeader] string Authorization)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            return _hotelService.Create(keys, hoteldto, companiesid);
+            return _hotelService.Create(keys, hoteldto);
         }
         [HttpPost]
         public ResponseDto<HotelResponse> Update(HotelAddOrUpdateRequest hotels, [FromHeader] string Authorization)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-
             return _hotelService.Update(hotels, keys);
         }
         //[HttpGet("{roleid}/{hotelid}")]

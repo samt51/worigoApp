@@ -12,7 +12,7 @@ namespace Worigo.API.Filter
             if (!context.ModelState.IsValid)
             {
                 var errors = context.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
-                context.Result = new BadRequestObjectResult(ResponseDto<NoContentResult>.Fail(400,errors));
+                context.Result = new BadRequestObjectResult(new ResponseDto<NoContentResult>().Fail(400, errors));
             }
         }
         public void OnActionExecuting(ActionExecutingContext filterContext)
@@ -20,7 +20,7 @@ namespace Worigo.API.Filter
             if (!filterContext.ModelState.IsValid)
             {
                 var errors = filterContext.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
-                filterContext.Result = new BadRequestObjectResult(ResponseDto<NoContentResult>.Fail(400,errors));
+                filterContext.Result = new BadRequestObjectResult(new ResponseDto<NoContentResult>().Fail(400, errors));
             }
         }
     }

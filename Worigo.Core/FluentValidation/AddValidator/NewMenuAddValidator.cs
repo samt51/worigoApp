@@ -4,7 +4,7 @@ using Worigo.Core.Enum;
 
 namespace Worigo.Core.FluentValidation.AddValidator
 {
-    public class NewMenuAddValidator: AbstractValidator<AddNewMenuRequest>
+    public class NewMenuAddValidator: AbstractValidator<FoodMenuRequest>
     {
         public NewMenuAddValidator()
         {

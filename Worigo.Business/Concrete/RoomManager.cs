@@ -32,7 +32,7 @@ namespace Worigo.Business.Concrete
                 _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, entity.hotelid);
                 return new ResponseDto<RoomDto>().Success(200);
             }
-            else if ((keys.companyid == hotel.Companyid) && keys.role == 2 || keys.role == 1)
+            else if ((keys.companyid == hotel.data.Companyid) && keys.role == 2 || keys.role == 1)
             {
                 var create = _roomsDal.Create(_mapper.Map<Room>(entity));
                 return new ResponseDto<RoomDto>().Success(200);
@@ -53,7 +53,7 @@ namespace Worigo.Business.Concrete
                 _managementOfHotelService.GetManagementBymanagementIdByHotelid(data.userId, room.hotelid);
                 return room;
             }
-            else if (data.role == 2 && data.companyid == _hotelService.GetById(data, room.hotelid).Companyid)
+            else if (data.role == 2 && data.companyid == _hotelService.GetById(data, room.hotelid).data.Companyid)
                 return room;
             else if (data.role == 1)
                 return room;
@@ -69,7 +69,7 @@ namespace Worigo.Business.Concrete
                 _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, data.hotelid);
                 return new ResponseDto<RoomListJoin>().Success(_roomsDal.roomGetByIdJoin(id), 200);
             }
-            else if (keys.role == 2 && keys.companyid == hotel.Companyid)
+            else if (keys.role == 2 && keys.companyid == hotel.data.Companyid)
                 return new ResponseDto<RoomListJoin>().Success(_roomsDal.roomGetByIdJoin(id), 200);
             else if (keys.role == 1)
                 return new ResponseDto<RoomListJoin>().Success(_roomsDal.roomGetByIdJoin(id), 200);
@@ -86,7 +86,7 @@ namespace Worigo.Business.Concrete
                 _managementOfHotelService.GetManagementBymanagementIdByHotelid(data.userId, hotelid);
                 return new ResponseDto<List<RoomListJoin>>().Success(_roomsDal.roomListJoins(hotelid), 200);
             }
-            else if (data.role == 2 && data.companyid == hotel.Companyid)
+            else if (data.role == 2 && data.companyid == hotel.data.Companyid)
                 return new ResponseDto<List<RoomListJoin>>().Success(_roomsDal.roomListJoins(hotelid), 200);
             else if (data.role == 1)
                 return new ResponseDto<List<RoomListJoin>>().Success(_roomsDal.roomListJoins(hotelid), 200);
@@ -99,7 +99,7 @@ namespace Worigo.Business.Concrete
         public ResponseDto<List<RoomListJoin>> TakeFullOrEmptyToRooms(int hotelid, int type, TokenKeys keys)
         {
             var hotel = _hotelService.GetById(keys, hotelid);
-            if (keys.role == 2 && (keys.companyid == hotel.Companyid) || keys.role == 1)
+            if (keys.role == 2 && (keys.companyid == hotel.data.Companyid) || keys.role == 1)
             {
                 return new ResponseDto<List<RoomListJoin>>().Success(_roomsDal.TakeFullOrEmptyToRooms(hotelid, type), 200);
             }
@@ -127,7 +127,7 @@ namespace Worigo.Business.Concrete
 
 
             }
-            if ((keys.companyid == hotel.Companyid) && keys.role == 2 || keys.role == 1)
+            if ((keys.companyid == hotel.data.Companyid) && keys.role == 2 || keys.role == 1)
             {
                 roomdata.ModifyDate = System.DateTime.Now;
                 roomdata.Price = entity.Price;

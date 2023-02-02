@@ -7,6 +7,6 @@ namespace Worigo.DataAccess.Abstrack
 {
     public interface IFoodMenuDal: IRepositoryDesignPattern<FoodMenu>
     {
-        List<NewMenuListResponse> GetMenuByHotelId(int hotelId);    
+        List<FoodMenuResponse> GetMenuByHotelId(int hotelId);    
     }
 }

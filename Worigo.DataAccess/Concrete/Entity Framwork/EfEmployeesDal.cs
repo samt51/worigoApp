@@ -7,6 +7,7 @@ using Worigo.Core.Dtos.Employee.Response;
 using Worigo.Core.Dtos.JoinClass;
 using Worigo.Core.Dtos.ManagerDto.Dto;
 using Worigo.Core.Dtos.ManagerDto.Response;
+using Worigo.Core.Dtos.User.Dto;
 using Worigo.Core.Encryption;
 using Worigo.Core.Exceptions;
 using Worigo.DataAccess.Abstrack;
@@ -244,36 +245,34 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
             }
         }
 
-        public ManagementResponse GetManagementById(int managerUserId)
+        public ManagementUserResponse GetManagementById(int managerUserId)
         {
             using (var db = new DataContext())
             {
                 var joinFirst = from d1 in db.Users.Where(x => x.id == managerUserId && x.isActive == true && x.isDeleted == false)
                                 join d2 in db.Employees.Where(x => x.isDeleted == false && x.isActive == true) on d1.id equals d2.userid
                                 join d3 in db.Companies.Where(x => x.isActive == true && x.isDeleted == false) on d1.companyid equals d3.id
-                                select new ManagementResponse
+                                select new ManagementUserResponse
                                 {
-                                    ManagementId = d1.id,
-                                    companiesname = d3.name,
+                                    Id = d1.id,
+                                    CompanyName = d3.name,
                                     surname = d2.Surname,
                                     name = d2.Name,
                                     email = d1.email,
                                     password = CommodMethods.ConvertDecrypt(d1.password),
                                     StartDateOfWork = d2.StartDateOfWork,
-                                    employeestypename = "Management",
+                                    EmployeeTypeName = "Management",
                                     ExitEntryDate = d2.ExitEntryDate,
                                     gender = d2.gender,
                                     imageurl = d2.ImageUrl,
-                                    phonenumber = d2.phoneNumber
+                                    phonenumber = d2.phoneNumber,
+                                    employeestypeid = d2.employeestypeid,
+                                    companyId = d3.id
                                 };
 
-                var firstdata = joinFirst.FirstOrDefault();
-                var hotelemployee = from manager in joinFirst
-                                    join managerhotel in db.ManagementOfHotels.Where(x => x.isActive == true && x.isDeleted == false) on manager.ManagementId equals managerhotel.managementid
-                                    join hotel in db.Hotel on managerhotel.hotelid equals hotel.id
-                                    select new ManagementResponseHotelResponse { HotelId = hotel.id, HotelName = hotel.HotelName, ManagerUserId = managerUserId };
-                firstdata.HotelList = hotelemployee.ToList();
-                return firstdata;
+
+                var data = joinFirst.FirstOrDefault();
+                return data;
             }
         }
 

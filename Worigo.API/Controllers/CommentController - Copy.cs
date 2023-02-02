@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Worigo.Business.Abstrack;
-using Worigo.Core.Dtos.JoinClass;
+using Worigo.Core.Dtos.Comment.Response;
 using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
 using Worigo.Core.Dtos.ListDto;
 using Worigo.Core.Dtos.ResponseDtos;
@@ -34,13 +34,13 @@ namespace Worigo.API.Controllers
             if ((keys.companyid == hotel.Companyid) && keys.role == 2 || keys.role == 1)
             {
                 var listcomment = _commentService.commentListJoins(hotelid);
-                return CreateActionResult(ResponseDto<List<CommentListJoin>>.Success(listcomment, 200));
+                return CreateActionResult(ResponseDto<List<CommentResponse>>.Success(listcomment, 200));
             }
             else if (keys.role == 3)
             {
                 _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, hotelid);
                 var listcomment = _commentService.commentListJoins(hotelid);
-                return CreateActionResult(ResponseDto<List<CommentListJoin>>.Success(listcomment, 200));
+                return CreateActionResult(ResponseDto<List<CommentResponse>>.Success(listcomment, 200));
             }
             return CreateActionResult(ResponseDto<List<Companies>>.Authorization());
         }
@@ -51,7 +51,7 @@ namespace Worigo.API.Controllers
             var commentSingularData = _commentService.GetByIdJoin(id);
             //if ((keys.hotelid == commentSingularData.hotelid && keys.role <= 3) || keys.role == 1)
             //{
-            return CreateActionResult(ResponseDto<CommentListJoin>.Success(commentSingularData, 200));
+            return CreateActionResult(ResponseDto<CommentResponse>.Success(commentSingularData, 200));
         }
         [HttpPost]
         public IActionResult Add(CommentDto entity)
