@@ -48,5 +48,17 @@ namespace Worigo.API.Controllers
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             return _commentService.Update(entity, keys);
         }
+        [HttpGet("{hotelid}/{employeeid}")]
+        public ResponseDto<List<CommentResponse>> GetEmployeesOfCommentByHotelidAndEmployeesid(int hotelid, int employeeid, [FromHeader] string Authorization)
+        {
+            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+            return _commentService.GetEmployeesOfCommentByHotelidAndEmployeesid(hotelid, employeeid, keys);
+        }
+        [HttpGet("{vertificationId}")]
+        public ResponseDto<List<GetOrderCommentResponse>> GetOrderCommentByVerificationId([FromHeader] string Authorization, int verificationId)
+        {
+            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+            return _commentService.GetOrderCommentByVerificationId(verificationId, keys);
+        }
     }
 }

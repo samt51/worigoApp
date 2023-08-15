@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Worigo.API.Model.UserViewModel;
 using Worigo.Business.Abstrack;
+using Worigo.Core.Dtos.Customer.Request;
+using Worigo.Core.Dtos.Customer.Response;
 using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
 using Worigo.Core.Dtos.Order.Request;
 using Worigo.Core.Dtos.ResponseDtos;
@@ -10,52 +14,41 @@ namespace Worigo.API.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class CustomerController : CustomBaseController
     {
-        private readonly IMapper _mapper;
-        private readonly IHotelService _hotelService;
-        private readonly IRoomService _roomService;
-        private readonly IOrderService _orderService;
-        private readonly IEmployeesService _employeesService;
-     
-        public CustomerController(IOrderService orderService, 
-           
-            IMapper mapper, IRoomService roomService, IHotelService hotelService, IEmployeesService employeesService)
+        private readonly ICustomerService _customerService;
+        private readonly IUserService _userService;
+        TokenViewModel tkn = new TokenViewModel();
+        public CustomerController(ICustomerService customerService, IUserService userService)
         {
-            _mapper = mapper;
-            _roomService = roomService;
-            _hotelService = hotelService;
-            _orderService = orderService;
-     
-            _employeesService = employeesService;   
+            _customerService = customerService;
+            _userService = userService;
         }
-
-        public IOrderService OrderService => _orderService;
-
-        //[HttpPost]
-        //public IActionResult AddNewOrder([FromHeader] string Authorization, OrderRequestDto orderRequestDto)
-        //{
-        //    TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-        //    var hotel = _hotelService.GetById(keys, orderRequestDto.hotelid);
-        //    if (keys.companyid == hotel.Companyid)
-        //    {
-        //        var list = _serviceValueOfEmployeeTypeService.GetDataByServiceValueId(orderRequestDto.serviceValueId, orderRequestDto.hotelid);
-        //        foreach (var item in list)
-        //        {
-        //            var employee = _employeesService.GetEmployeeByEmployeeTypeId(item.employeetypeid, orderRequestDto.hotelid);
-        //            if (employee.Count > 1)
-        //            {
-        //                foreach (var emp in employee)
-        //                {
-
-        //                }
-        //            }
-        //        }
-        //        var entity = _mapper.Map<Order>(orderRequestDto);
-        //        OrderService.Create(entity);
-        //        return CreateActionResult(ResponseDto<NoContentResult>.Success(200));
-        //    }
-        //    return CreateActionResult(ResponseDto<NoContentResult>.Authorization());
-        //}
+        [HttpPost]
+        [AllowAnonymous]
+        public ResponseDto<ObjectResult> CustomerPostByCode(CustomerAddOrUpdate request)
+        {
+            var response = new ResponseDto<ObjectResult>();
+            var customer = _customerService.PostCustomerByCode(request, null);
+            if (customer.data != null)
+            {
+                return new ResponseDto<ObjectResult>().Success(200);
+            }
+            response.errors = customer.errors;
+            return response;
+        }
+        [HttpGet("{code}")]
+        public ResponseDto<GetCustomerOfServicesResponse> GetCustomerOfServiceResponse([FromHeader] string Authorization, string code)
+        {
+            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+            return _customerService.GetCustomerOfServiceResponse(code, keys);
+        }
+        [HttpGet("{serviceId}/{code}")]
+        public ResponseDto<GetCustomerOfServiceValueResponse> GetCustomerOfServiceValueResponse([FromHeader] string Authorization, int serviceId, string code)
+        {
+            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+            return _customerService.GetCustomerOfServiceValueResponse(serviceId, code, keys);
+        }
     }
 }

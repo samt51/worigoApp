@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Worigo.Business.Abstrack;
 using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
 using Worigo.Core.Dtos.ResponseDtos;
+using Worigo.Core.Dtos.ServiceOfValueDto.Request;
+using Worigo.Core.Dtos.ServiceOfValueDto.Response;
 using Worigo.Core.Dtos.ServicesValue.Request;
 using Worigo.Core.Dtos.ServicesValue.Response;
 
@@ -15,15 +17,17 @@ namespace Worigo.API.Controllers
     public class ServiceValuesController : CustomBaseController
     {
         private readonly IServiceValueService _serviceValueService;
-        public ServiceValuesController(IServiceValueService serviceValueService)
+        private readonly IServiceOfValueService _serviceOfValueService;
+        public ServiceValuesController(IServiceValueService serviceValueService, IServiceOfValueService serviceOfValueService)
         {
             _serviceValueService = serviceValueService;
+            _serviceOfValueService = serviceOfValueService;
         }
-        [HttpGet("{serviceid}")]
-        public ResponseDto<List<ServicesValueResponse>> GetValuesByServiceId([FromHeader] string Authorization, int serviceid)
+        [HttpGet("{serviceid}/{hotelId}")]
+        public ResponseDto<List<ServicesValueResponse>> GetValuesByServiceId([FromHeader] string Authorization, int serviceId, int hotelId)
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-            return _serviceValueService.GetValueByServiceId(serviceid, keys);
+            return _serviceValueService.GetValueByServiceId(hotelId, serviceId, keys);
         }
         [HttpGet("{id}")]
         public ResponseDto<ServicesValueResponse> GetById([FromHeader] string Authorization, int id)
@@ -43,24 +47,12 @@ namespace Worigo.API.Controllers
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             return _serviceValueService.Update(request, keys);
         }
-        //[HttpPost]
-        //public IActionResult AddTaskServiceValueByEmployeeType([FromHeader] string Authorization, ServiceValueOfEmployeeTypeAddOrUpdateRequest request)
-        //{
-        //    TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-        //    var hotel = _hotelService.GetById(keys, request.hotelid);
-        //    var entity = _mapper.Map<ServiceValueOfEmployeeType>(request);
-        //    if (keys.role == 2 && (keys.companyid == hotel.Companyid) || keys.role == 1)
-        //    {
-        //        _serviceValueOfEmployeeTypeService.Create(entity);
-        //        return CreateActionResult(ResponseDto<Services>.Success(200));
-        //    }
-        //    else if (keys.role == 3)
-        //    {
-        //        _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, request.hotelid);
-        //        _serviceValueOfEmployeeTypeService.Create(entity);
-        //        return CreateActionResult(ResponseDto<Services>.Success(200));
-        //    }
-        //    return CreateActionResult(ResponseDto<List<Services>>.Authorization());
-        //}
+        [HttpPost]
+        public ResponseDto<ServiceOfValueResponse> PostServiceValueByHotelId([FromHeader] string Authorization, ServiceOfValueAddOrUpdate request)
+        {
+            TokenKeys keys = AuthorizationCont.Authorization(Authorization);
+            return _serviceOfValueService.PostServiceValueByHotelId(request, keys);
+        }
+
     }
 }

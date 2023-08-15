@@ -15,5 +15,7 @@ namespace Worigo.Business.Abstrack
         ResponseDto<CommentResponse> Create(CommentAddOrUpdateRequest request, TokenKeys keys);
         ResponseDto<CommentResponse> Update(CommentAddOrUpdateRequest request, TokenKeys keys);
         ResponseDto<HotelGeneralPointResponse> HotelGeneralPointByHotelId(int hotelid, TokenKeys keys);
+        ResponseDto<List<CommentResponse>> GetEmployeesOfCommentByHotelidAndEmployeesid(int hotelid, int employeeid, TokenKeys keys);
+        ResponseDto<List<GetOrderCommentResponse>> GetOrderCommentByVerificationId(int vertificationId, TokenKeys keys);
     }
 }

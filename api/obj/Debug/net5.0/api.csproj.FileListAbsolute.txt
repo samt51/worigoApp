@@ -74,3 +74,8 @@ C:\Users\Batu\Documents\GitHub\worigoApp\api\bin\Debug\net5.0\Worigo.Core.pdb
 C:\Users\Batu\Documents\GitHub\worigoApp\api\bin\Debug\net5.0\Worigo.DataAccess.pdb
 C:\Users\Batu\Documents\GitHub\worigoApp\api\bin\Debug\net5.0\Worigo.Entity.pdb
 C:\Users\Batu\Documents\GitHub\worigoApp\api\obj\Debug\net5.0\api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Batu\Documents\GitHub\worigoApp\api\obj\Debug\net5.0\staticwebassets\api.StaticWebAssets.Pack.cache
+C:\Users\Batu\Documents\GitHub\worigoApp\api\obj\Debug\net5.0\staticwebassets\msbuild.api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Batu\Documents\GitHub\worigoApp\api\obj\Debug\net5.0\staticwebassets\msbuild.build.api.props
+C:\Users\Batu\Documents\GitHub\worigoApp\api\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.api.props
+C:\Users\Batu\Documents\GitHub\worigoApp\api\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.api.props

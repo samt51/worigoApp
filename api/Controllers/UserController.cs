@@ -35,17 +35,16 @@ namespace Worigo.API.Controllers
         private readonly IUserRoleService _userRoleService;
         private readonly ICompaniesService _companiesService;
         private readonly IManagementOfHotelService _managementOfHotelService;
-        private readonly IResetPasswordForCodeService _resetPasswordForCodeService;
+
         private readonly IDirectorsDepartmansService _directorsDepartmansService;
         TokenViewModel tkn = new TokenViewModel();
-        public UserController(IEmployeesService employeesService, IResetPasswordForCodeService resetPasswordForCodeService,
+        public UserController(IEmployeesService employeesService,
             IManagementOfHotelService managementOfHotelService, ICompaniesService companiesService,
             IUserRoleService userRoleService, IDirectorsDepartmansService directorsDepartmansService,
             IMapper mapper, IUserService userService, IHotelService hotelService)
         {
             _mapper = mapper;
             _userService = userService;
-            _resetPasswordForCodeService = resetPasswordForCodeService;
             _hotelService = hotelService;
             _userRoleService = userRoleService;
             _employeesService = employeesService;
@@ -62,7 +61,7 @@ namespace Worigo.API.Controllers
             if (user != null)
             {
 
-                var token = _userService.ProduceToken(user.data.id.ToString(), user.data.email, user.data.roleid.ToString(), user.data.companyid.ToString(), loginViewModel.deviceId);
+                var token = _userService.ProduceToken(user.data.id.ToString(), user.data.email, user.data.roleid.ToString(), user.data.companyid.ToString(), loginViewModel.deviceId, loginViewModel.lng);
                 tkn.Token = token;
                 return new ResponseDto<TokenViewModel>().Success(tkn, 200);
             }
@@ -111,7 +110,6 @@ namespace Worigo.API.Controllers
         [HttpGet("{code}")]
         public IActionResult ResetPassword(int code)
         {
-            var cod = _resetPasswordForCodeService.GetCodeByCode(code);
             return null;
         }
 

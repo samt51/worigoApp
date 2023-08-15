@@ -10,6 +10,11 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
 {
     public class EfManagementOfHotelsDal : EfRepositoryDal<ManagementOfHotels, DataContext>, IManagementOfHotelsDal
     {
+        public void AuthorizeControll(int role, int userid, int hotelId, int companyId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public ManagementOfHotels GetManagementBymanagementIdByHotelid(int managementid, int hotelid)
         {
             using (var db = new DataContext())

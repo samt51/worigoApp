@@ -7,6 +7,7 @@ namespace Worigo.DataAccess.Abstrack
 {
     public interface IServicesValuesDal : IRepositoryDesignPattern<ServicesValues>
     {
-        List<ServicesValueResponse> GetValueByServiceId(int serviceid);
+        List<ServicesValueResponse> GetValueByServiceId(int serviceid, int hotelId);
+
     }
 }

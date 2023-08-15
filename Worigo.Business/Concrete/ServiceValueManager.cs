@@ -16,17 +16,17 @@ namespace Worigo.Business.Concrete
         private readonly IServicesValuesDal _servicesValuesDal;
         private readonly IMapper _mapper;
         private readonly IHotelDal _hotelDal;
+        private readonly IHotelService _hotelService;
         private readonly IServicesDal _servicesDal;
         private readonly IManagementOfHotelsDal _managementOfHotelsDal;
-        public ServiceValueManager(IServicesValuesDal servicesValuesDal, IHotelDal hotelDal, IServicesDal servicesDal, IManagementOfHotelsDal managementOfHotelsDal)
+        public ServiceValueManager(IHotelService hotelService, IServicesValuesDal servicesValuesDal, IHotelDal hotelDal, IServicesDal servicesDal, IManagementOfHotelsDal managementOfHotelsDal)
         {
             _servicesValuesDal = servicesValuesDal;
             _hotelDal = hotelDal;
             _servicesDal = servicesDal;
             _managementOfHotelsDal = managementOfHotelsDal;
+            _hotelService = hotelService;
         }
-
-
 
         public ResponseDto<ServicesValueResponse> Create(ServicesValuesAddOrUpdateRequest request, TokenKeys keys)
         {
@@ -44,25 +44,16 @@ namespace Worigo.Business.Concrete
             }
             return new ResponseDto<ServicesValueResponse>().Authorization();
         }
-
-
-
-
         public ResponseDto<ServicesValueResponse> GetById(int id, TokenKeys keys)
         {
             var map = _mapper.Map<ServicesValueResponse>(_servicesValuesDal.GetById(id));
             return new ResponseDto<ServicesValueResponse>().Success(map, 200);
         }
-
-
-
-        public ResponseDto<List<ServicesValueResponse>> GetValueByServiceId(int serviceid, TokenKeys keys)
+        public ResponseDto<List<ServicesValueResponse>> GetValueByServiceId(int hotelId, int serviceid, TokenKeys keys)
         {
-            return new ResponseDto<List<ServicesValueResponse>>().Success(_servicesValuesDal.GetValueByServiceId(serviceid), 200);
+            _managementOfHotelsDal.AuthorizeControll(keys.role, keys.userId, hotelId, keys.companyid);
+            return new ResponseDto<List<ServicesValueResponse>>().Success(_servicesValuesDal.GetValueByServiceId(serviceid, hotelId), 200);
         }
-
-
-
         public ResponseDto<ServicesValueResponse> Update(ServicesValuesAddOrUpdateRequest request, TokenKeys keys)
         {
             var value = _servicesValuesDal.GetById(request.id);

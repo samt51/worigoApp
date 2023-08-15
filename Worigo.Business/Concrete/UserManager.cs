@@ -170,7 +170,7 @@ namespace Worigo.Business.Concrete
 
 
 
-        public string ProduceToken(string id, string email, string role, string companyid, string deviceid)
+        public string ProduceToken(string id, string email, string role, string companyid, string deviceid,string lng)
         {
             if (!string.IsNullOrEmpty(deviceid))
             {
@@ -194,7 +194,8 @@ namespace Worigo.Business.Concrete
                     new Claim("userId", id),
                     new Claim(ClaimTypes.Email, email),
                     new Claim("role", role),
-                    new Claim("companyid",companyid)
+                    new Claim("companyid",companyid),
+                    new Claim("lng",lng)
 
                 }),
                 Expires = DateTime.UtcNow.AddYears(1),

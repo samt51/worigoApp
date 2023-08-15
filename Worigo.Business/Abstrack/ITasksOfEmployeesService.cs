@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Worigo.Core.Dtos.Order.Response;
+using Worigo.Core.Dtos.ResponseDtos;
 using Worigo.Entity.Concrete;
 
 namespace Worigo.Business.Abstrack
@@ -9,5 +11,6 @@ namespace Worigo.Business.Abstrack
         TasksOfEmployees GetById(int id);
         TasksOfEmployees Create(TasksOfEmployees entity);
         TasksOfEmployees Update(TasksOfEmployees entity);
+ 
     }
 }

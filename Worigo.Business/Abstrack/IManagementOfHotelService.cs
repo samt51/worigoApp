@@ -14,5 +14,6 @@ namespace Worigo.Business.Abstrack
         ManagementOfHotels Update(ManagementOfHotels entity);
         ManagementOfHotels Delete(ManagementOfHotels entity);
         void IsthereManagementByDepartmentDirectory(int managementId, int directoryEmployeeId);
+        void AuthorizeControll(int role, int userid, int hotelId,int companyId);
     }
 }

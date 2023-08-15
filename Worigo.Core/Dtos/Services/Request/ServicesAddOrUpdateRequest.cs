@@ -8,7 +8,5 @@ namespace Worigo.Core.Dtos.Services.Request
         public string Name { get; set; }
         public IFormFile? file { get; set; }
         public string ImageUrl { get; set; }
-        public int HotelId { get; set; }
-
     }
 }

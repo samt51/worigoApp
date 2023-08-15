@@ -41,8 +41,6 @@ namespace Worigo.API.Controllers
         {
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             return _hotelService.GetHotelByCompanyid(companiesid, keys);
-
-
         }
         [HttpGet]
         public ResponseDto<List<HotelDto>> GetAll([FromHeader] string Authorization)
@@ -76,47 +74,6 @@ namespace Worigo.API.Controllers
             TokenKeys keys = AuthorizationCont.Authorization(Authorization);
             return _hotelService.Update(hotels, keys);
         }
-        //[HttpGet("{roleid}/{hotelid}")]
-        //public IActionResult GetPersonByHotelAndRoleId([FromHeader] string Authorization, int roleid, int hotelid)
-        //{
-        //    TokenKeys keys = AuthorizationCont.Authorization(Authorization);
-        //    var hotel = _hotelService.GetById(keys, hotelid);
-        //    if ((keys.role == 3) && roleid > 2)
-        //    {
-        //        _managementOfHotelService.GetManagementBymanagementIdByHotelid(keys.userId, hotelid);
-        //        if (roleid == 3)
-        //        {
-
-        //            var listmanagement = _userService.GetManagemetByHotelid(keys, hotelid);
-        //            return CreateActionResult(ResponseDto<List<ManagementResponse>>.Success(listmanagement, 200));
-        //        }
-        //        else if (roleid == 4)
-        //        {
-        //            var listmanagement = _userService.GetEmployeesByHotelid(hotelid, roleid);
-        //            return CreateActionResult(ResponseDto<List<EmployeesAndUserListDto>>.Success(listmanagement, 200));
-        //        }
-
-        //    }
-        //    else if ((keys.companyid == hotel.Companyid) && keys.role == 2 && roleid > 2 || keys.role == 1)
-        //    {
-        //        if (roleid == 2)
-        //        {
-        //            var listmanagement = _userService.GetHotelAdminByCompaniesId(hotel.Companyid);
-        //            return CreateActionResult(ResponseDto<List<AddHotelAdminModelDto>>.Success(listmanagement, 200));
-        //        }
-        //        else if (roleid == 3)
-        //        {
-        //            var listmanagement = _userService.GetManagemetByHotelid(keys, hotelid);
-        //            return CreateActionResult(ResponseDto<List<ManagementResponse>>.Success(listmanagement, 200));
-        //        }
-        //        else if (roleid == 4)
-        //        {
-        //            var listmanagement = _userService.GetEmployeesByHotelid(hotelid, roleid);
-        //            return CreateActionResult(ResponseDto<List<EmployeesAndUserListDto>>.Success(listmanagement, 200));
-        //        }
-        //    }
-        //    return CreateActionResult(ResponseDto<List<HotelDto>>.Authorization());
-
-        //}
+        
     }
 }

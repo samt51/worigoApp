@@ -21,12 +21,16 @@ namespace Worigo.Business.Concrete
         private readonly ICommentService _companiesDal;
         private readonly IMapper _mapper;
         private readonly ICompaniesService _companiesService;
-        public HotelManager(ICompaniesService companiesService, IMapper mapper, IManagementOfHotelService managementOfHotelsDal, IHotelDal hotelsDal)
+        private readonly IServicesDal _servicesDal;
+        private readonly IHotelOfServiceDal _hotelOfServiceDal;
+        public HotelManager(IHotelOfServiceDal hotelOfServiceDal, IServicesDal servicesDal, ICompaniesService companiesService, IMapper mapper, IManagementOfHotelService managementOfHotelsDal, IHotelDal hotelsDal)
         {
             _hotelsDal = hotelsDal;
             _companiesService = companiesService;
             _managementOfHotelsDal = managementOfHotelsDal;
             _mapper = mapper;
+            _hotelOfServiceDal = hotelOfServiceDal;
+            _servicesDal = servicesDal;
         }
 
 
@@ -40,12 +44,39 @@ namespace Worigo.Business.Concrete
                     entity.ImageUrl = FileToByteConvert.FromFileToByte(entity.file);
                 }
                 var map = _hotelsDal.Create(_mapper.Map<Hotel>(entity));
-
+                var services = _servicesDal.GetAll(x=>x.isDeleted==false&&x.isActive==true);
+                foreach (var item in services)
+                {
+                    var saveEntity = new HotelOfService
+                    {
+                        ServiceId=item.id,
+                        HotelId=map.id,
+                        CreatedDate=System.DateTime.Now,
+                        isActive=true,
+                        isDeleted=false,
+                        ModifyDate=System.DateTime.Now
+                    };
+                    _hotelOfServiceDal.Create(saveEntity);
+                }
                 return new ResponseDto<HotelResponse>().Success(_mapper.Map<HotelResponse>(map), 200);
             }
             else if (data.role == 1)
             {
                 var map = _hotelsDal.Create(_mapper.Map<Hotel>(entity));
+                var services = _servicesDal.GetAll(x => x.isDeleted == false && x.isActive == true);
+                foreach (var item in services)
+                {
+                    var saveEntity = new HotelOfService
+                    {
+                        ServiceId = item.id,
+                        HotelId = map.id,
+                        CreatedDate = System.DateTime.Now,
+                        isActive = true,
+                        isDeleted = false,
+                        ModifyDate = System.DateTime.Now
+                    };
+                    _hotelOfServiceDal.Create(saveEntity);
+                }
                 return new ResponseDto<HotelResponse>().Success(_mapper.Map<HotelResponse>(map), 200);
             }
             return new ResponseDto<HotelResponse>().Authorization();

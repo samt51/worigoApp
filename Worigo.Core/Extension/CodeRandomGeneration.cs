@@ -4,15 +4,15 @@ namespace Worigo.Core.Extension
 {
     public class CodeRandomGeneration
     {
-        public static int RandomVertificationCodeCreate(int sayi)
+        public static string RandomVertificationCodeCreate()
         {
             var random = new Random();
             var result = "";
-            for (int i = 0; i < sayi; i++)
+            for (int i = 0; i < 6; i++)
             {
                 result += random.Next(0, 10);
             }
-            return Convert.ToInt32(result);
+            return result;
         }
     }
 }
