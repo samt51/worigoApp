@@ -11,6 +11,7 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
 {
     public class EfRepositoryDal<T, TEntity> : IRepositoryDesignPattern<T> where T : class where TEntity : DbContext, new()
     {
+
         public T Create(T entity)
         {
             using (var db = new TEntity())
@@ -59,8 +60,10 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
                 var data = db.Set<T>().Update(entity);
                 db.SaveChanges();
                 return data.Entity;
-
             }
+
+
         }
     }
+
 }

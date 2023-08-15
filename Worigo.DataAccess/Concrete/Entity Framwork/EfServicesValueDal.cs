@@ -9,9 +9,9 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
 {
     public class EfServicesValueDal : EfRepositoryDal<ServicesValues, DataContext>, IServicesValuesDal
     {
-        public List<ServicesValueResponse> GetValueByServiceId(int serviceid)
+        public List<ServicesValueResponse> GetValueByServiceId(int serviceid, int hotelId)
         {
-            using (var db=new DataContext())
+            using (var db = new DataContext())
             {
                 var joinlist = from d1 in db.ServicesValues.Where(x => x.Serviceid == serviceid)
                                join d2 in db.Services on d1.Serviceid equals d2.id
@@ -21,8 +21,8 @@ namespace Worigo.DataAccess.Concrete.Entity_Framwork
                                    value = d1.value,
                                    ServiceName = d2.Name,
                                    Serviceid = serviceid,
-                                   ImageUrl=d1.ImageUrl
-                                 
+                                   ImageUrl = d1.ImageUrl
+
                                };
                 return joinlist.ToList();
             }

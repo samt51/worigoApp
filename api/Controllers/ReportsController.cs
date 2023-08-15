@@ -16,13 +16,13 @@ namespace Worigo.API.Controllers
     public class ReportsController : CustomBaseController
     {
 
-        private readonly IVertificationCodeService _vertificationCodeService;
+        private readonly IVerificationCodeService _vertificationCodeService;
         private readonly IHotelService _hotelService;
         private readonly IDepartmanService _departmanService;
         private readonly ICommentService _commentService;
         private readonly IManagementOfHotelService _managementOfHotelService;
 
-        public ReportsController(ICommentService commentService, IVertificationCodeService vertificationCodeService, IManagementOfHotelService managementOfHotelService, IDepartmanService departmanService, IHotelService hotelService)
+        public ReportsController(ICommentService commentService, IVerificationCodeService vertificationCodeService, IManagementOfHotelService managementOfHotelService, IDepartmanService departmanService, IHotelService hotelService)
         {
 
             _vertificationCodeService = vertificationCodeService;

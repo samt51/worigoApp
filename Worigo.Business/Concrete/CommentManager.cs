@@ -43,9 +43,9 @@ namespace Worigo.Business.Concrete
 
         public ResponseDto<CommentResponse> Create(CommentAddOrUpdateRequest request, TokenKeys keys)
         {
-            var map = _mapper.Map<Comment>(request);
-            var response = _commentDal.Create(map);
-            return new ResponseDto<CommentResponse>().Success(_mapper.Map<CommentResponse>(response), 200);
+            _managementOfHotelService.AuthorizeControll(keys.role, keys.userId, request.hotelId, keys.companyid);
+            return _commentDal.PostCommentByOrderId(request);
+
         }
         public ResponseDto<CommentResponse> GetById(int id, TokenKeys keys)
         {
@@ -59,15 +59,33 @@ namespace Worigo.Business.Concrete
             }
             return new ResponseDto<CommentResponse>().Authorization();
         }
+
+        public ResponseDto<List<CommentResponse>> GetEmployeesOfCommentByHotelidAndEmployeesid(int hotelid, int employeeid, TokenKeys keys)
+        {
+            var hotel = _hotelService.GetById(keys, hotelid);
+            var data = _commentDal.GetEmployeesOfCommentByHotelidAndEmployeesid(hotelid, employeeid);
+            if (keys.role >= 2 && keys.role <= 5 && (keys.companyid == hotel.data.Companyid) || keys.role == 1)
+            {
+                return new ResponseDto<List<CommentResponse>>().Success(data.data, 200);
+            }
+            return new ResponseDto<List<CommentResponse>>().Authorization();
+        }
+
+        public ResponseDto<List<GetOrderCommentResponse>> GetOrderCommentByVerificationId(int vertificationId, TokenKeys keys)
+        {
+            _managementOfHotelService.AuthorizeControll(keys.role, keys.userId, 0, keys.companyid);
+            return _commentDal.GetOrderCommentByVertificationId(vertificationId);
+        }
+
         public ResponseDto<CommentResponse> Update(CommentAddOrUpdateRequest request, TokenKeys keys)
         {
             var data = _commentDal.GetById(request.Id);
-            data.employeesid = request.employeesid;
             data.Commentary = request.Commentary;
-            data.Point = request.Point;
+            data.EmployeePoint = request.EmployeePoint;
             data.speedPoint = request.speedPoint;
             data.contentsPoint = request.contentsPoint;
             data.ModifyDate = System.DateTime.Now;
+            data.isDeleted = request.IsActive;
             var response = _commentDal.Update(data);
             return new ResponseDto<CommentResponse>().Success(_mapper.Map<CommentResponse>(data), 200);
         }

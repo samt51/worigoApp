@@ -19,7 +19,7 @@ namespace Worigo.Business.Abstrack
         ResponseDto<List<ManagementUserResponse>> GetManagemetByHotelid(TokenKeys token, int hotelid);
         ResponseDto<List<UserResponse>> GetAllJoin(TokenKeys keys);
 
-        string ProduceToken(string id, string email, string role, string companyid, string deviceid);
+        string ProduceToken(string id, string email, string role, string companyid, string deviceid,string lng);
         ResponseDto<UserResponse> GetUserByEmailAndPassword(string email, string password);
         ResponseDto<List<UserResponse>> GetUserByHotelid(int hotelid, TokenKeys keys);
 

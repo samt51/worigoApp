@@ -5,6 +5,7 @@ using Worigo.Core.Dtos.Companies.Request;
 using Worigo.Core.Dtos.Companies.Response;
 using Worigo.Core.Dtos.JoinClass.AuthorizationClassView;
 using Worigo.Core.Dtos.ResponseDtos;
+using Worigo.Core.RepositoryDesign.Abstrack;
 using Worigo.DataAccess.Abstrack;
 using Worigo.Entity.Concrete;
 
@@ -14,13 +15,15 @@ namespace Worigo.Business.Concrete
     {
         private readonly ICompaniesDal _companiesDal;
         private readonly IMapper _mapper;
+ 
         public CompaniesManager(ICompaniesDal companiesDal, IMapper mapper)
         {
             _companiesDal = companiesDal;
+    
             _mapper = mapper;
         }
 
-        public ResponseDto<CompaniesResponse> Create(CompaniesAddOrUpdateRequest entity, TokenKeys keys)
+        public   ResponseDto<CompaniesResponse> Create(CompaniesAddOrUpdateRequest entity, TokenKeys keys)
         {
             if (keys.role == 1)
             {

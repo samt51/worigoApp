@@ -28,6 +28,8 @@ namespace Worigo.Business.Concrete
             return _tasksOfEmployeesDal.GetById(id);
         }
 
+        
+
         public TasksOfEmployees Update(TasksOfEmployees entity)
         {
          return   _tasksOfEmployeesDal.Update(entity);

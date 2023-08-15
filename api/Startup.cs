@@ -106,92 +106,88 @@ namespace Worigo.API
             services.AddHttpClient<FcmSender>();
             services.AddHttpClient<ApnSender>();
 
-            services.AddScoped<IEmployeeOfOrderDal, EfEmployeeOfOrderDal>();
-            services.AddScoped<IEmployeeOfOrderService, EmployeeOfOrdersManager>();
+            services.AddTransient<IEmployeeOfOrderDal, EfEmployeeOfOrderDal>();
+            services.AddTransient<IEmployeeOfOrderService, EmployeeOfOrdersManager>();
 
             services.AddTransient<INotificationService, NotificationService>();
 
-            services.AddScoped<IWaitingOrdersDal, EfWaitingOrdersDal>();
-            services.AddScoped<IWaitingOrdersService, WaitingOrdersManager>();
 
 
-            services.AddScoped<IOrderListDal, EfOrderListDal>();
-            services.AddScoped<IOrderListService, OrderListManager>();
+            services.AddTransient<ICustomerDal, EfCustomerDal>();
+            services.AddTransient<ICustomerService, CustomerManager>();
 
-            services.AddScoped<IOrderDal, EfOrderDal>();
-            services.AddScoped<IOrderService, OrderManager>();
 
-            services.AddScoped<IContentsOfFoodDal, EfContentsOfFoodDal>();
-            services.AddScoped<IContentsOfFoodService, ContentsOfFoodManager>();
+            services.AddTransient<IOrderDal, EfOrderDal>();
+            services.AddTransient<IOrderService, OrderManager>();
 
-            services.AddScoped<IOrderDal, EfOrderDal>();
-            services.AddScoped<IOrderService, OrderManager>();
+            services.AddTransient<IContentsOfFoodDal, EfContentsOfFoodDal>();
+            services.AddTransient<IContentsOfFoodService, ContentsOfFoodManager>();
 
-            services.AddScoped<IFoodMenuDal, EfFoodMenuDal>();
-            services.AddScoped<IFoodMenuService, FoodMenuManager>();
+            services.AddTransient<IOrderDal, EfOrderDal>();
+            services.AddTransient<IOrderService, OrderManager>();
 
-            services.AddScoped<IFoodMenuDetailDal, EfFoodMenuDetailDal>();
-            services.AddScoped<IFoodMenuDetailService, FoodMenuDetailManager>();
+            services.AddTransient<IFoodMenuDal, EfFoodMenuDal>();
+            services.AddTransient<IFoodMenuService, FoodMenuManager>();
 
-            services.AddScoped<IDirectorsDepartmansDal, EfDirectorsDepartmansDal>();
-            services.AddScoped<IDirectorsDepartmansService, DirectorsDepartmansManager>();
+            services.AddTransient<IFoodMenuDetailDal, EfFoodMenuDetailDal>();
+            services.AddTransient<IFoodMenuDetailService, FoodMenuDetailManager>();
 
-            services.AddScoped<ITasksOfEmployeesDal, EfTasksOfEmployeesDal>();
-            services.AddScoped<ITasksOfEmployeesService, TasksOfEmployeesManager>();
+            services.AddTransient<IDirectorsDepartmansDal, EfDirectorsDepartmansDal>();
+            services.AddTransient<IDirectorsDepartmansService, DirectorsDepartmansManager>();
 
-            services.AddScoped<IResetPasswordForCodeDal, EfResetPasswordForCodeDal>();
-            services.AddScoped<IResetPasswordForCodeService, ResetPasswordForCodeManager>();
+            services.AddTransient<ITasksOfEmployeesDal, EfTasksOfEmployeesDal>();
+            services.AddTransient<ITasksOfEmployeesService, TasksOfEmployeesManager>();
 
-            services.AddScoped<IUserRoleDal, EfUserRoleDal>();
-            services.AddScoped<IUserRoleService, UserRoleManager>();
+            services.AddTransient<IUserRoleDal, EfUserRoleDal>();
+            services.AddTransient<IUserRoleService, UserRoleManager>();
 
-            services.AddScoped<ICommentDal, EfCommentDal>();
-            services.AddScoped<ICommentService, CommentManager>();
+            services.AddTransient<ICommentDal, EfCommentDal>();
+            services.AddTransient<ICommentService, CommentManager>();
 
-            services.AddScoped<IDepartmanDal, EfDepartmanDal>();
-            services.AddScoped<IDepartmanService, DepartmanManager>();
+            services.AddTransient<IDepartmanDal, EfDepartmanDal>();
+            services.AddTransient<IDepartmanService, DepartmanManager>();
 
-            services.AddScoped<IUserDal, EfUserDal>();
-            services.AddScoped<IUserService, UserManager>();
+            services.AddTransient<IUserDal, EfUserDal>();
+            services.AddTransient<IUserService, UserManager>();
 
-            services.AddScoped<IEmployeesDal, EfEmployeesDal>();
-            services.AddScoped<IEmployeesService, EmployeesManager>();
+            services.AddTransient<IEmployeesDal, EfEmployeesDal>();
+            services.AddTransient<IEmployeesService, EmployeesManager>();
 
-            services.AddScoped<IHotelDal, EfHotelDal>();
-            services.AddScoped<IHotelService, HotelManager>();
+            services.AddTransient<IHotelDal, EfHotelDal>();
+            services.AddTransient<IHotelService, HotelManager>();
 
-            services.AddScoped<IRoomDal, EfRoomDal>();
-            services.AddScoped<IRoomService, RoomManager>();
+            services.AddTransient<IRoomDal, EfRoomDal>();
+            services.AddTransient<IRoomService, RoomManager>();
 
-            services.AddScoped<IServicesDal, EfServiceDal>();
-            services.AddScoped<IServicesService, ServicesManager>();
+            services.AddTransient<IServicesDal, EfServiceDal>();
+            services.AddTransient<IServicesService, ServicesManager>();
 
-            //services.AddScoped<IServiceOfHotelDal, EfServiceOfHotelDal>();
-            //services.AddScoped<IServiceOfHotelService, ServiceOfHotelManager>();
+            services.AddTransient<IHotelOfServiceDal, EfHotelOfServiceDal>();
+            services.AddTransient<IHotelOfServicesService, HotelOfServiceManager>();
 
-            services.AddScoped<IServicesValuesDal, EfServicesValueDal>();
-            services.AddScoped<IServiceValueService, ServiceValueManager>();
+            services.AddTransient<IServicesValuesDal, EfServicesValueDal>();
+            services.AddTransient<IServiceValueService, ServiceValueManager>();
 
-            //services.AddScoped<IServiceValueOfHotelDal, EfServiceValueOfHotelDal>();
-            //services.AddScoped<IServiceValueOfHotelService, ServiceOfValueHotelManager>();
+            services.AddTransient<IServiceOfValueDal, EfServiceOfValueDal>();
+            services.AddTransient<IServiceOfValueService, ServiceOfValueManager>();
 
-            services.AddScoped<IRoomTypeDal, EfRoomTypeDal>();
-            services.AddScoped<IRoomTypeService, RoomTypeManager>();
+            services.AddTransient<IRoomTypeDal, EfRoomTypeDal>();
+            services.AddTransient<IRoomTypeService, RoomTypeManager>();
 
-            services.AddScoped<IVertificationCodeDal, EfVertificationCodeDal>();
-            services.AddScoped<IVertificationCodeService, VertificationCodeManager>();
+            services.AddTransient<IVerificationCodeDal, EfVerificationCodeDal>();
+            services.AddTransient<IVerificationCodeService, VerificationCodeManager>();
 
-            services.AddScoped<IAllImagesDal, EfAllImagesDal>();
-            services.AddScoped<IAllImagesService, AllImagesManager>();
+            services.AddTransient<IAllImagesDal, EfAllImagesDal>();
+            services.AddTransient<IAllImagesService, AllImagesManager>();
 
-            services.AddScoped<ICompaniesDal, EfCompaniesDal>();
-            services.AddScoped<ICompaniesService, CompaniesManager>();
+            services.AddTransient<ICompaniesDal, EfCompaniesDal>();
+            services.AddTransient<ICompaniesService, CompaniesManager>();
 
-            services.AddScoped<IEmployeesTypeDal, EfEmployeesTypeDal>();
-            services.AddScoped<IEmployeesTypeService, EmployeesTypeManager>();
+            services.AddTransient<IEmployeesTypeDal, EfEmployeesTypeDal>();
+            services.AddTransient<IEmployeesTypeService, EmployeesTypeManager>();
 
-            services.AddScoped<IManagementOfHotelsDal, EfManagementOfHotelsDal>();
-            services.AddScoped<IManagementOfHotelService, ManagementOfHotelManager>();
+            services.AddTransient<IManagementOfHotelsDal, EfManagementOfHotelsDal>();
+            services.AddTransient<IManagementOfHotelService, ManagementOfHotelManager>();
 
             #endregion
 

@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Dtos\ContentsOfMenuDetail\Request\" />
     <Folder Include="Dtos\DirectorsDepartmans\Response\" />
-    <Folder Include="Dtos\Order\Response\" />
     <Folder Include="RepositoryDesign\Concrete\" />
   </ItemGroup>
 

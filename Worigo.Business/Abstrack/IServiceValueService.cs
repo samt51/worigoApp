@@ -8,7 +8,7 @@ namespace Worigo.Business.Abstrack
 {
     public interface IServiceValueService
     {
-        ResponseDto<List<ServicesValueResponse>> GetValueByServiceId(int serviceid, TokenKeys keys);
+        ResponseDto<List<ServicesValueResponse>> GetValueByServiceId(int hotelId,int serviceid, TokenKeys keys);
         ResponseDto<ServicesValueResponse> GetById(int id, TokenKeys keys);
         ResponseDto<ServicesValueResponse> Create(ServicesValuesAddOrUpdateRequest request, TokenKeys keys);
         ResponseDto<ServicesValueResponse> Update(ServicesValuesAddOrUpdateRequest request, TokenKeys keys);

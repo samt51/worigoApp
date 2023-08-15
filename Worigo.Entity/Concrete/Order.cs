@@ -12,6 +12,11 @@ namespace Worigo.Entity.Concrete
         public decimal totalPrice { get; set; }
         public int customerId { get; set; }
         public int hotelid { get; set; }
-        public DateTime orderDate { get; set; }=DateTime.Now;   
+        public DateTime orderDate { get; set; }=DateTime.Now;
+        public int? EmployeeId { get; set; }
+        public DateTime? CompletedDate { get; set; }
+        public string Description { get; set; }
+        public int Status { get; set; }
+        public int VertificationId { get; set; }
     }
 }

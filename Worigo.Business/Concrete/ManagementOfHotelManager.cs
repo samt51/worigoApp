@@ -13,6 +13,12 @@ namespace Worigo.Business.Concrete
         {
             _managementOfHotelsDal = managementOfHotelsDal;
         }
+
+        public void AuthorizeControll(int role, int userid, int hotelId,int companyId)
+        {
+            _managementOfHotelsDal.AuthorizeControll(role, userid, hotelId,companyId);    
+        }
+
         public ManagementOfHotels Create(ManagementOfHotels entity)
         {
           return  _managementOfHotelsDal.Create(entity);

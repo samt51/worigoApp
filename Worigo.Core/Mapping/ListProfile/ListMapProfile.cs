@@ -2,6 +2,8 @@
 using Worigo.Core.Dtos.Comment.Response;
 using Worigo.Core.Dtos.Companies.Request;
 using Worigo.Core.Dtos.Companies.Response;
+using Worigo.Core.Dtos.Customer.Request;
+using Worigo.Core.Dtos.Customer.Response;
 using Worigo.Core.Dtos.Departman.Request;
 using Worigo.Core.Dtos.Departman.Response;
 using Worigo.Core.Dtos.DirectorsDepartmans.Request;
@@ -15,6 +17,7 @@ using Worigo.Core.Dtos.FoodMenuDetailDto.Dto;
 using Worigo.Core.Dtos.FoodMenuDetailDto.Response;
 using Worigo.Core.Dtos.Hotel.Request;
 using Worigo.Core.Dtos.Hotel.Response;
+using Worigo.Core.Dtos.HotelOfServiceDto.Request;
 using Worigo.Core.Dtos.JoinClass;
 using Worigo.Core.Dtos.ListDto;
 using Worigo.Core.Dtos.ManagerDto.Request;
@@ -29,8 +32,8 @@ using Worigo.Core.Dtos.User.Request;
 using Worigo.Core.Dtos.User.Response;
 using Worigo.Core.Dtos.UserRole.Request;
 using Worigo.Core.Dtos.UserRole.Response;
-using Worigo.Core.Dtos.VertificationCodeDto.Request;
-using Worigo.Core.Dtos.VertificationCodeDto.Response;
+using Worigo.Core.Dtos.VerificationCodeDto.Request;
+using Worigo.Core.Dtos.VerificationCodeDto.Response;
 using Worigo.Core.FluentValidation;
 using Worigo.Entity.Concrete;
 
@@ -70,8 +73,8 @@ namespace Worigo.Core.Mapping.ListProfile
             CreateMap<Employees, ManagementAddDto>().ReverseMap();
 
 
-            CreateMap<VertificationCodes, VertificationCodeRequest>().ReverseMap();
-            CreateMap<VertificationCodes, VertificationCodeResponse>().ReverseMap();
+            CreateMap<VerificationCodes, VerificationCodeRequest>().ReverseMap();
+            CreateMap<VerificationCodes, VerificationCodeResponse>().ReverseMap();
           
             CreateMap<Order, OrderAddValidator>().ReverseMap();
 
@@ -117,6 +120,13 @@ namespace Worigo.Core.Mapping.ListProfile
 
             CreateMap<Comment, CommentAddOrUpdateRequest>().ReverseMap();
             CreateMap<Comment, CommentResponse>().ReverseMap();
+
+            CreateMap<Customer, CustomerAddOrUpdate>().ReverseMap();
+            CreateMap<Customer, CustomerResponse>().ReverseMap();
+
+
+            CreateMap<HotelOfService, HotelOfServiceAddOrUpdate>().ReverseMap();
+
         }
     }
 }
